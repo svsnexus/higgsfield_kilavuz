@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higgsfield.ai Masterclass: Platform, Arayüz ve Film Yönetmenliği Ansiklopedisi</title>
+    <style>
+        :root {
+            --bg-main: #070a10;
+            --bg-panel: #0f1522;
+            --bg-card: #182235;
+            --bg-input: #0a0e17;
+            --accent: #a3e635; /* Higgsfield Lime */
+            --accent-blue: #38bdf8;
+            --accent-purple: #c084fc;
+            --accent-amber: #fbbf24;
+            --accent-rose: #f43f5e;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: #243046;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        /* SOL MENÜ (NAVİGASYON) */
+        .sidebar {
+            width: 360px;
+            background-color: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .logo-area {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #090e18;
+        }
+
+        .logo-area h2 {
+            font-size: 1.05rem;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .logo-area span {
+            background: var(--accent);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .search-container {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-main);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-panel);
+            color: var(--text-light);
+            font-size: 0.82rem;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        .nav-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+
+        .nav-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .nav-scroll::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .nav-group {
+            padding: 14px 18px 5px;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent-blue);
+            font-weight: 800;
+        }
+
+        .nav-link {
+            padding: 9px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-dim);
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            font-size: 0.84rem;
+            transition: 0.15s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-light);
+        }
+
+        .nav-link.active {
+            background: rgba(163, 230, 53, 0.1);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .tag {
+            font-size: 0.68rem;
+            background: #090d16;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+        }
+
+        /* SAĞ ÇALIŞMA ALANI */
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .header-bar {
+            padding: 12px 28px;
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .breadcrumb {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            padding: 7px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-lime {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            font-weight: 700;
+        }
+
+        .btn-lime:hover {
+            background: #84cc16;
+            color: #000;
+        }
+
+        .btn-blue {
+            background: var(--accent-blue);
+            color: #000;
+            border-color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .btn-blue:hover {
+            background: #0284c7;
+            color: #fff;
+        }
+
+        .btn-red {
+            background: #dc2626;
+            color: #fff;
+            border-color: #ef4444;
+            font-weight: 700;
+        }
+
+        .btn-red:hover {
+            background: #b91c1c;
+        }
+
+        .stage {
+            flex: 1;
+            padding: 28px 36px;
+            overflow-y: auto;
+            line-height: 1.65;
+        }
+
+        .stage::-webkit-scrollbar {
+            width: 6px;
+        }
+        .stage::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .module {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .module.active {
+            display: block;
+            animation: fadeIn 0.2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 1.7rem;
+            margin-bottom: 12px;
+            color: var(--text-light);
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin: 24px 0 12px;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            margin: 14px 0 6px;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-dim);
+            margin-bottom: 14px;
+            font-size: 0.92rem;
+        }
+
+        /* KARTLAR VE TABLOLAR */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+            margin: 16px 0;
+        }
+
+        .box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .box-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-family: monospace;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            background: var(--bg-panel);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        th, td {
+            padding: 11px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.86rem;
+            vertical-align: top;
+        }
+
+        th {
+            background: #06090f;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        td code {
+            color: #f472b6;
+            background: rgba(244, 114, 182, 0.12);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.82rem;
+        }
+
+        /* PROMPT VE KOD KUTULARI */
+        .code-panel {
+            background: #05080f;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .en-text {
+            font-family: monospace;
+            color: var(--accent-blue);
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+            padding-right: 90px;
+            line-height: 1.5;
+            user-select: all;
+        }
+
+        .tr-text {
+            font-size: 0.84rem;
+            color: var(--text-dim);
+            border-top: 1px dashed var(--border);
+            padding-top: 8px;
+            font-style: italic;
+        }
+
+        .copy-trigger {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--bg-card);
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .copy-trigger:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* UI SİMÜLATÖRÜ */
+        .ui-mockup {
+            background: #05080f;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .ui-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .ui-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .ui-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* KONSOL FORMLARI */
+        .console-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            background: var(--bg-panel);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        select, input, textarea {
+            padding: 9px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-main);
+            color: var(--text-light);
+            font-size: 0.84rem;
+            outline: none;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .footer-nav {
+            padding: 12px 28px;
+            background: var(--bg-panel);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        /* TOAST BİLDİRİMİ */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #10b981;
+            color: #000;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.25s all ease;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOAST BİLDİRİMİ -->
+    <div id="toast">✓ Kopyalandı!</div>
+
+    <!-- SOL MENÜ -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <h2>⚡ HIGGSFIELD.AI YÖNETMENİ</h2>
+            <span>MASTERCLASS</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="quickSearch" oninput="filterNav(this.value)" placeholder="🔍 Hızlı Ara: 'kamera', 'lipsync', 'soul id'..." class="search-input">
+        </div>
+        <div class="nav-scroll" id="navMenu">
+            <div class="nav-group">ARAYÜZ & MENÜLER</div>
+<div class="nav-link active" onclick="go(0)">
+        <span class="truncate">1. Tüm Sekmeler ve Stüdyolar Haritası</span>
+        <span class="tag">#1</span>
+    </div>
+<div class="nav-link" onclick="go(1)">
+        <span class="truncate">2. Cinema Studio Konsolu & Parametreler</span>
+        <span class="tag">#2</span>
+    </div>
+<div class="nav-link" onclick="go(2)">
+        <span class="truncate">3. Görsel & Video AI Motorları Seçimi</span>
+        <span class="tag">#3</span>
+    </div>
+<div class="nav-link" onclick="go(3)">
+        <span class="truncate">4. Video Üretim Ayarları (Kalite, Süre, Bitrate)</span>
+        <span class="tag">#4</span>
+    </div>
+<div class="nav-link" onclick="go(4)">
+        <span class="truncate">5. Duygu Seçimi: Emotion Wheel & Film Setup</span>
+        <span class="tag">#5</span>
+    </div>
+<div class="nav-link" onclick="go(5)">
+        <span class="truncate">6. Renk Seçme Ayarları: Colors & Özel Palet Menüsü</span>
+        <span class="tag">#6</span>
+    </div>
+<div class="nav-link" onclick="go(6)">
+        <span class="truncate">7. Kamera, Lens, Diyafram ve 'Change Presets' Menüsü</span>
+        <span class="tag">#7</span>
+    </div>
+<div class="nav-link" onclick="go(7)">
+        <span class="truncate">8. Canvas, Inpaint, Popcorn, Vibe Motion & Style Menüsü</span>
+        <span class="tag">#8</span>
+    </div>
+<div class="nav-group">FİLM YÖNETMENLİĞİ</div>
+<div class="nav-link" onclick="go(8)">
+        <span class="truncate">9. Sanat Yönetmenliği: Mekân, Set ve Dekor (@loc)</span>
+        <span class="tag">#9</span>
+    </div>
+<div class="nav-link" onclick="go(9)">
+        <span class="truncate">10. Kostüm, Makyaj & 3-Panelli Karakter Kartı (@char)</span>
+        <span class="tag">#10</span>
+    </div>
+<div class="nav-link" onclick="go(10)">
+        <span class="truncate">11. Kameramanlık (DOP): Ölçek, Açı, Hareket ve Lensler</span>
+        <span class="tag">#11</span>
+    </div>
+<div class="nav-link" onclick="go(11)">
+        <span class="truncate">12. Işıkçılık (Gaffing) ve Renk (Color Grade)</span>
+        <span class="tag">#12</span>
+    </div>
+<div class="nav-link" onclick="go(12)">
+        <span class="truncate">13. Reji ve Oyunculuk: Duygu, Janr ve Mizansen</span>
+        <span class="tag">#13</span>
+    </div>
+<div class="nav-link" onclick="go(13)">
+        <span class="truncate">14. Ses Yönetmenliği: Dublaj, Lip-Sync, Foley & SFX</span>
+        <span class="tag">#14</span>
+    </div>
+<div class="nav-link" onclick="go(14)">
+        <span class="truncate">15. Kurgu: Zaman Kontrolü ve Akıcı Web/Yazılım Sunumu</span>
+        <span class="tag">#15</span>
+    </div>
+<div class="nav-group">HIGGSFIELD ACADEMY</div>
+<div class="nav-link" onclick="go(15)">
+        <span class="truncate">16. Higgsfield Academy Resmi Müfredatı (Ders 1 - 8)</span>
+        <span class="tag">#16</span>
+    </div>
+<div class="nav-group">YÖNETMEN LABORATUVARI</div>
+<div class="nav-link" onclick="go(16)">
+        <span class="truncate">🎬 6 Katmanlı Yönetmen Prompt Konsolu (Seedance Prompter)</span>
+        <span class="tag">#17</span>
+    </div>
+<div class="nav-link" onclick="go(17)">
+        <span class="truncate">🎛️ Cinema Studio 4.0 Ayar & Menü Reçetesi Simülatörü</span>
+        <span class="tag">#18</span>
+    </div>
+
+        </div>
+    </div>
+
+    <!-- SAĞ ÇALIŞMA ALANI -->
+    <div class="workspace">
+        <div class="header-bar">
+            <div class="breadcrumb" id="topTitle">1. Tüm Sekmeler ve Stüdyolar Haritası</div>
+            <div class="top-actions">
+                <button class="btn" onclick="go(0)">🏠 Başa Dön</button>
+                <button class="btn btn-lime" onclick="go(15)">🎓 Akademi (Ders 1 - 8)</button>
+                <button class="btn btn-blue" onclick="go(16)">🎬 Prompt Konsolu</button>
+                <button class="btn" onclick="go(17)">🎛️ Menü Simülatörü</button>
+            </div>
+        </div>
+
+        <div class="stage" id="stageContainer">
+        <div class="module active" id="view-0">
+<h1>1. Higgsfield.ai Platform Mimarisi: Tüm Sekmeler Ne İşe Yarar?</h1>
+                <p>Higgsfield.ai tek bir video üreticisi değil; farklı yapay zekâ modellerinin (Sora, Kling, Seedance,
+                    Veo, Nano Banana, GPT Image, Soul) üzerine inşa edilmiş bir <strong>Yaratıcı Yönetmenlik Katmanıdır
+                        (Creative Control Layer)</strong>. Platforma girdiğinizde üst menüde ve alt navigasyonda yer
+                    alan tüm stüdyo ve araçların görevleri şunlardır:</p>
+
+                <h2>A. Ana Üretim Stüdyoları (Studios)</h2>
+                <div class="grid-2">
+                    <div class="box">
+                        <span class="box-badge">Cinema Studio</span>
+                        <h3>Sinema ve Çoklu Sahne Stüdyosu</h3>
+                        <p><strong>Ne İşe Yarar:</strong> Film yönetmenlerinin ana çalışma alanıdır. İçinde
+                            <code>Image</code> ve <code>Video</code> olmak üzere iki mod bulunur. Karakterleri,
+                            mekânları ve nesneleri birleştirip kamera açısı, lens ve ışık kontrolüyle sinematik sahneler
+                            çekmek için kullanılır.
+                        </p>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">Marketing Studio</span>
+                        <h3>Pazarlama ve Reklam Stüdyosu</h3>
+                        <p><strong>Ne İşe Yarar:</strong> Hazır ticari şablonlar (presets) kullanarak ürün yerleştirme,
+                            UGC (kullanıcı deneyimi) reklamları ve sosyal medya spotları üretmek için tasarlanmıştır.
+                            Hızlı reklam çıkışı sağlar.</p>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">Lipsync Studio</span>
+                        <h3>Dudak Senkronizasyonu ve Konuşturma</h3>
+                        <p><strong>Ne İşe Yarar:</strong> Ürettiğiniz bir karakter görseline veya videoya dışarıdan bir
+                            ses dosyası (örneğin ElevenLabs çıktısı) yükleyerek karakterin ağız, çene ve yüz kaslarını o
+                            sese milimetrik olarak uydurur.</p>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">Higgsfield Popcorn</span>
+                        <h3>Storyboard (Film Şeridi) Oluşturucu</h3>
+                        <p><strong>Ne İşe Yarar:</strong> Kredi harcamadan önce senaryonuzu kare kare (Shot 1, Shot 2,
+                            Shot 3) resimli taslaklara dönüştürür. Kadrajları ve akışı video üretmeden önce onaylamanızı
+                            sağlar.</p>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">Higgsfield Canvas & Inpaint</span>
+                        <h3>Bölgesel Görsel Düzenleme ve Genişletme</h3>
+                        <p><strong>Ne İşe Yarar:</strong> Bir görselin tamamını bozmadan sadece fırçayla (Brush)
+                            boyadığınız kısmını değiştirir (Inpaint) veya dar bir kadrajın kenarlarını çizerek
+                            genişletir (Outpaint).</p>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">Photodump Studio & Fashion Factory</span>
+                        <h3>Katalog, Moda ve Influencer Çekimleri</h3>
+                        <p><strong>Ne İşe Yarar:</strong> Tek bir karakterin farklı kıyafetlerle (Fashion Factory) veya
+                            günlük doğal yaşam pozlarıyla (Photodump) tek tıkla onlarca sosyal medya fotoğrafını üretir.
+                        </p>
+                    </div>
+                </div>
+
+                <h2>B. Soul Ekosistemi ve Platform Araçları</h2>
+                <table>
+                    <tr>
+                        <th>Sekme / Araç Adı</th>
+                        <th>Amacı ve Ne Zaman Kullanılacağı</th>
+                        <th>Resmi Bağlantı</th>
+                    </tr>
+                    <tr>
+                        <td><code>Soul ID Character</code></td>
+                        <td>Gerçek bir insanın veya yarattığınız bir karakterin yüzünü sisteme eğitip (LoRA benzeri
+                            kimlik kilidi) her sahnede %100 aynı yüzle çıkmasını sağlar.</td>
+                        <td><a href="https://higgsfield.ai/character" target="_blank" style="color:var(--accent)">Aç
+                                ↗</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>Soul 2.0 & Soul Cinema</code></td>
+                        <td>Higgsfield'ın kendi geliştirdiği ultra gerçekçi insan dokusu, mikro mimikler ve sinematik
+                            duygu motorudur.</td>
+                        <td><a href="https://higgsfield.ai/soul-cinema" target="_blank" style="color:var(--accent)">Aç
+                                ↗</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>Supercomputer & Collab</code></td>
+                        <td>Yapay zekâ asistanıyla sohbet ederek senaryo geliştirme, referans görselleri analiz ettirme
+                            ve doğrudan sohbet içinden üretim tetikleme alanıdır.</td>
+                        <td><a href="https://higgsfield.ai/supercomputer-intro" target="_blank"
+                                style="color:var(--accent)">Aç ↗</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>AI Motion Designer</code></td>
+                        <td>Arayüz (UI/UX), tipografi, logo ve grafik tasarımlarına akıcı hareket ve kamera geçişi
+                            kazandıran animasyon modülüdür.</td>
+                        <td><a href="https://higgsfield.ai/ai-motion-designer" target="_blank"
+                                style="color:var(--accent)">Aç ↗</a></td>
+                    </tr>
+                    <tr>
+                        <td><code>MCP / CLI & API</code></td>
+                        <td>Claude Desktop gibi harici yapay zekâ yazılımlarını doğrudan Higgsfield hesabınıza bağlayıp
+                            menülere tıklamadan uzaktan komutla video ürettirme protokolüdür.</td>
+                        <td><a href="https://higgsfield.ai/mcp" target="_blank" style="color:var(--accent)">Aç ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Reference Extension</code></td>
+                        <td>Tarayıcıda gezerken beğendiğiniz herhangi bir film karesini veya fotoğrafı tek tıkla
+                            Higgsfield kütüphanenize referans olarak kaydeden Chrome eklentisidir.</td>
+                        <td><a href="https://chromewebstore.google.com/detail/higgsfield-reference/oohmjaflbknghbidmaoonmchcodhmkgj"
+                                target="_blank" style="color:var(--accent)">Aç ↗</a></td>
+                    </tr>
+                </table>
+        </div>
+        <div class="module" id="view-1">
+<h1>2. Cinema Studio Konsolu: Her Buton ve Ayarın Teknik İşlevi</h1>
+                <p>Cinema Studio'yu açtığınızda ekranın alt kısmında yer alan kontrol barı, sizin film kameranızın
+                    gövdesidir. Buradaki bir parametreyi yanlış seçmek hem sahneyi bozar hem de kredinizi yakar.
+                    Aşağıdaki interaktif şemada her butonun görevini inceleyin:</p>
+
+                <div class="ui-mockup">
+                    <div style="color:var(--text-dim); font-size:0.8rem; margin-bottom:8px;">🔼 <strong>ÜST YÜKLEME
+                            ALANI (UPLOAD ZONE):</strong> Aynı anda en fazla <strong>9 Sabit Görsel</strong>, <strong>3
+                            Video Klip</strong> ve <strong>3 Ses Dosyası (Audio)</strong> yüklenebilir.</div>
+                    <div
+                        style="background:#111827; padding:14px; border-radius:6px; border:1px solid var(--border); color:#9ca3af; font-family:monospace;">
+                        [ PROMPT KUTUSU ] Maksimum 2.500 karakter kapasiteli yönetmen talimat alanı. Karakter ve
+                        mekânları bağlamak için @ işareti kullanılır...
+                    </div>
+                    <div class="ui-row">
+                        <span class="ui-pill"
+                            onclick="alert('MOD SEÇİMİ: Image (Görsel üretimi - Karakter ve mekanlar her zaman burada başlar) veya Video (Hareketli sahne üretimi).')">🖼️
+                            Image / 🎥 Video</span>
+                        <span class="ui-pill"
+                            onclick="alert('+ VE @ BUTONU: Elements kütüphanenizdeki kayıtlı karakter (@char), mekan (@loc) veya nesneleri (@prop) sahneye bağlar.')">➕
+                            / @ References</span>
+                        <span class="ui-pill"
+                            onclick="alert('MODEL SEÇİCİ: Seedance 2.5, Seedance 2.0 4K, Kling, Veo, Sora gibi alt motorları seçer.')">📊
+                            Seedance 2.5 ></span>
+                        <span class="ui-pill"
+                            onclick="alert('ÇERÇEVE ORANI (ASPECT RATIO): 16:9 (Yatay YouTube/Sunum), 9:16 (Dikey Reels/TikTok/Shorts), 21:9 (Sinema Perdesi), 1:1 (Kare).')">🔲
+                            16:9 / 9:16 / 21:9</span>
+                        <span class="ui-pill"
+                            onclick="alert('ÇÖZÜNÜRLÜK (RESOLUTION): 480p (Draft/Taslak - En düşük kredi maliyeti, testler için zorunlu), 720p, 1080p ve Native 4K (Final baskı).')">💎
+                            480p / 720p / 1080p / 4K</span>
+                        <span class="ui-pill"
+                            onclick="alert('SÜRE (DURATION): Sahnenin uzunluğu (5s, 10s, 12s, 15s). Çoklu plan (multi-shot) geçişleri için 10s-15s seçilir.')">⏱️
+                            5s / 10s / 15s</span>
+                        <span class="ui-pill"
+                            onclick="alert('VARYASYON SAYISI (OUTPUT COUNT): Tek basışta kaç alternatif (Take) üretileceği (1/4 ile 4/4 arası). Kredi korumak için 1/4 tutulmalıdır.')">➖
+                            1/4 ➕</span>
+                        <span class="ui-pill" style="background:var(--accent); color:#000; font-weight:bold;"
+                            onclick="alert('GENERATE & LIVE QUOTE: Üzerinde yazan rakam (Örn: ✨ 15 veya ✨ 98) o üretimin kaç kredi harcayacağını canlı gösterir. Basmadan önce mutlaka kontrol edin!')">GENERATE
+                            ✨ 15</span>
+                    </div>
+                </div>
+
+                <h2>Sol Panel (Workspace Navigation) Sekmeleri</h2>
+                <ul>
+                    <li><strong>My generations:</strong> Ürettiğiniz tüm görsel ve videoların geçmişi. Sağ üstteki
+                        <code>Filter</code> butonuyla sadece videoları, görselleri veya favorileri süzebilirsiniz.
+                    </li>
+                    <li><strong>My elements (@):</strong> Kaydettiğiniz sabit karakterlerin, mekânların ve ürünlerin
+                        kütüphanesi. Buraya kaydedilen her varlık prompt içinde <code>@isim</code> yazılarak çağrılır.
+                    </li>
+                    <li><strong>Projects (Sol Alt):</strong> Çalışmalarınızı birbirine karıştırmamak için oluşturduğunuz
+                        ayrı klasörlerdir (Örn: Test projesi ile Kurumsal vitrin projesini ayırmak).</li>
+                </ul>
+        </div>
+        <div class="module" id="view-2">
+<h1>3. Hangi AI Motoru (Model) Ne Zaman Seçilir?</h1>
+                <p>Bir yönetmenin çekeceği sahneye göre kamera gövdesi (ARRI, RED, Sony Venice) seçmesi gibi, Higgsfield
+                    içinde de sahnenin ihtiyacına göre doğru yapay zekâ modelini seçmelisiniz:</p>
+
+                <h2>A. Görsel Üretim Modelleri (Image Mode)</h2>
+                <table>
+                    <tr>
+                        <th>Model Adı</th>
+                        <th>En Güçlü Olduğu Alan</th>
+                        <th>Önerilen Ayar</th>
+                    </tr>
+                    <tr>
+                        <td><code>GPT Image 2.5 Sunburst</code></td>
+                        <td>Fotogerçekçi film seti mekânları, 3 panelli karakter kartları ve metin/logo doğruluğu en
+                            yüksek modeldir.</td>
+                        <td>Quality: High, Resolution: Max</td>
+                    </tr>
+                    <tr>
+                        <td><code>Nano Banana Pro</code></td>
+                        <td>Hızlı konsept üretimi, stilize reklam kareleri ve yüksek kontrastlı sosyal medya görselleri.
+                        </td>
+                        <td>Prompt Guide standartları</td>
+                    </tr>
+                    <tr>
+                        <td><code>Soul 2.0</code></td>
+                        <td>İnsan cildi gözenekleri, doğal göz/saç detayları ve portre gerçekçiliği.</td>
+                        <td>Portre ve Yakın Plan</td>
+                    </tr>
+                    <tr>
+                        <td><code>Seedream 5.0 Pro</code></td>
+                        <td>Kompleks ışıklandırma, sinematik atmosfer ve geniş açılı mimari/doğa kompozisyonları.</td>
+                        <td>16:9 / 21:9 Geniş Kadraj</td>
+                    </tr>
+                </table>
+
+                <h2>B. Video Üretim Modelleri (Video Mode)</h2>
+                <table>
+                    <tr>
+                        <th>Model Adı</th>
+                        <th>En Güçlü Olduğu Alan</th>
+                        <th>Yönetmen İpucu</th>
+                    </tr>
+                    <tr>
+                        <td><code>Seedance 2.5 / 2.0 4K</code></td>
+                        <td>Çoklu referans (9 görsel + 3 video + 3 ses), sahneler arası kesintisiz geçiş (multi-shot
+                            continuity), gerçekçi fizik ve Native 4K çözünürlük.</td>
+                        <td>480p Draft ile test et, 1080p/4K ile bitir.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Kling / Sora / Veo</code></td>
+                        <td>Karmaşık fiziksel hareketler, sıvı/kumaş simülasyonları ve uzun sinematik sekanslar.</td>
+                        <td>Yüksek kredi tüketir; sadece final sahnede kullanın.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Minimax Hailuo</code></td>
+                        <td>Arayüz (UI/UX) animasyonları, mikro ekran etkileşimleri ve pikselleri bozmadan kaydırma
+                            hareketleri.</td>
+                        <td>Vibe Motion & Ekran sunumları.</td>
+                    </tr>
+                </table>
+        </div>
+        <div class="module" id="view-3">
+<h1>1. Video Üretim Ayarları: Kalite, Ölçek, Süre ve Bitrate Nerede ve Nasıl Ayarlanır?</h1>
+                <div class="ui-path">📍 Menü Yolu: Üst Menüden [Video] veya [Cinema Studio] ➔ Alt Kontrol Çubuğu (Bottom
+                    Parameter Bar)</div>
+                <p>Higgsfield.ai'de bir sahneyi videoya dönüştürürken ekranın altındaki kontrol çubuğunda yer alan her
+                    bir üretim parametresinin yeri, seçenekleri ve nasıl ayarlanacağı aşağıdadır:</p>
+
+                <div class="ui-sim">
+                    <div class="ui-sim-header">🎛️ HIGGSFIELD ALT PARAMETRE ÇUBUĞU (CANLI MENÜ REHBERİ)</div>
+                    <div class="control-grid">
+                        <div class="ctrl-item">
+                            <label>1. MODEL DROPDOWN (Motor Seçimi)</label>
+                            <select>
+                                <option>Seedance 2.5 (Çoklu Referans & Ses)</option>
+                                <option>Seedance 2.0 4K (Native 4K Fizik)</option>
+                                <option>Cinema Studio 4.0 (Tam Yönetmen Modu)</option>
+                                <option>Veo 3.1 / Kling 3.0 / WAN 2.6</option>
+                                <option>Minimax Hailuo (UI & Web Hareketi)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>2. RESOLUTION (Kalite / Çözünürlük)</label>
+                            <select>
+                                <option>💎 480p (Draft / Taslak - Düşük Kredi)</option>
+                                <option>💎 720p (Standart Önizleme)</option>
+                                <option>💎 1080p (Full HD Sunum)</option>
+                                <option>💎 4K (Native Ultra HD - Sadece Final)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>3. RATIO (Çerçeve Ölçeği / Boyut)</label>
+                            <select>
+                                <option>🔲 16:9 (Yatay - Web, YouTube, Sunum)</option>
+                                <option>🔲 9:16 (Dikey - Reels, TikTok, Shorts)</option>
+                                <option>🔲 21:9 (Sinema Geniş Perde)</option>
+                                <option>🔲 1:1 (Kare Post)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>4. DURATION SLIDER (Süre Ayarı)</label>
+                            <select>
+                                <option>⏱️ 4s - 5s (Kısa Test / Tek Hareket)</option>
+                                <option>⏱️ 10s - 12s (İdeal Sinematik Akış)</option>
+                                <option>⏱️ 14s - 15s (Seedance Maksimum Süre)</option>
+                                <option>⏱️ 20s (Cinema Studio 4.0 Uzun Plan)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>5. BITRATE DROPDOWN (Doku Kalitesi)</label>
+                            <select>
+                                <option>📊 Normal (Standart Testler İçin)</option>
+                                <option>📊 High (Kumaş, Su, Toz ve UI Netliği İçin)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>6. AUDIO & OUTPUT COUNT (Ses & Adet)</label>
+                            <select>
+                                <option>🔊 Audio: ON | Output: 1/4 (Tek Çıktı)</option>
+                                <option>🔇 Audio: OFF | Output: 2/4 - 4/4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Adım Adım Ayarlama Kuralları</h2>
+                <table>
+                    <tr>
+                        <th>Ayar Adı</th>
+                        <th>Nereden Yapılır?</th>
+                        <th>Teknik Kullanım Kuralı</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Upload Zone (Yükleme Alanı)</strong></td>
+                        <td>Prompt kutusunun hemen üstü/yanı (<code>+</code> ve <code>@</code> butonları)</td>
+                        <td>Aynı anda maksimum <strong>9 sabit görsel (static images)</strong>, <strong>3 video
+                                klip</strong> ve <strong>3 ses dosyası (audio tracks)</strong> yüklenebilir.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resolution (Kalite)</strong></td>
+                        <td>Alt çubuktaki elmas (💎) ikonlu açılır menü</td>
+                        <td>Sahneyi ve hareketi test ederken daima <strong>480p</strong> seçin. Sahne onaylandığında
+                            <strong>1080p</strong> veya <strong>Native 4K</strong>'ya geçin (Seedance 2.0 4K sonradan
+                            büyütme değil, doğrudan gerçek 4K render alır).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duration (Süre)</strong></td>
+                        <td>Alt çubuktaki saat (⏱️) ikonlu kaydırıcı (slider)</td>
+                        <td>4 saniyeden 15 saniyeye (Cinema Studio 4.0'da 20 saniyeye) kadar ayarlanır. Karmaşık kamera
+                            ve oyuncu hareketlerinin fizik motorunda doğal oturması için en az <strong>12-15
+                                saniye</strong> önerilir.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bitrate (Veri Hızı)</strong></td>
+                        <td>Alt çubuktaki Bitrate açılır menüsü</td>
+                        <td><code>Normal</code>'den <code>High</code> (Yüksek) konumuna getirildiğinde; hareketli
+                            sahnelerde kumaş kıvrımları, saç telleri ve ekran yazılarındaki piksellenmeyi engeller.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Post-Render (Üretim Sonrası Kalite)</strong></td>
+                        <td>Üretilen videonun üzerindeki <code>Upscale</code> ve <code>Reframe</code> butonları</td>
+                        <td><strong>Higgsfield Upscale / Enhancer:</strong> Videoyu 24-60 fps hızında 4K'ya yükseltir,
+                            <em>FPS Boost</em> ile akıcılık verir, <em>Video Deflicker</em> ile ışık titremesini siler.
+                            <strong>Reframe:</strong> 16:9 videoyu tek tıkla 9:16 veya 1:1'e uyarlar.</td>
+                    </tr>
+                </table>
+        </div>
+        <div class="module" id="view-4">
+<h1>2. Video Üretiminde Ayarlardan Duygu (Emotion Wheel) ve Tür (Film Setup) Seçimi</h1>
+                <div class="ui-path">📍 Menü Yolu: [Video] Sekmesi ➔ Model: [Cinema Studio 3.5 / 4.0] ➔ [Film Setup] &
+                    [Emotion Wheel] Panelleri</div>
+                <p>Önceki kılavuzda sadece prompt olarak verilen duygu, komedi, dram ve tempo ayarları; Higgsfield'da
+                    <strong>Cinema Studio 4.0</strong> modeli seçildiğinde doğrudan <strong>tıklanabilir arayüz
+                        menüleri</strong> olarak açılır. İşte bu iki menünün adım adım kullanımı:</p>
+
+                <div class="step-box">
+                    <span class="step-num">AŞAMA 1: FILM SETUP MENÜSÜ (SAHNE TÜRÜ, DÖNEM VE TEMPO SEÇİMİ)</span>
+                    <h3>Nerededir ve Nasıl Ayarlanır?</h3>
+                    <p>Video sekmesinde modeli <strong>Cinema Studio 4.0</strong> olarak seçtiğinizde yönetmen panelinde
+                        <strong>Film Setup</strong> sekmesi belirir. Burada 3 ayrı açılır menüden sahnenin genel
+                        atmosferini seçersiniz:</p>
+                    <ul style="margin-left:20px; color:var(--muted); font-size:0.9rem;">
+                        <li><strong>1. Genre (Tür / Janr Seçimi):</strong> Sahnenin türünü seçin: <code>Drama</code>
+                            (Dram), <code>Comedy</code> (Komedi), <code>Action</code> (Aksiyon), <code>Commercial</code>
+                            (Reklam), <code>Sci-Fi</code>, <code>Thriller</code>.</li>
+                        <li><strong>2. Era (Dönem Seçimi):</strong> Görsel dokunun ait olduğu zaman dilimini seçin (Örn:
+                            Modern ve net görünüm için <code>2020s</code>, retro görünüm için <code>1990s</code> veya
+                            <code>1970s</code>).</li>
+                        <li><strong>3. Tempo (Sahne Hızı / Ritmi):</strong> Hareketlerin ve kurgunun akış hızını seçin:
+                            <code>Calm</code> (Sakin/Ağırbaşlı), <code>Moderate</code> (Dengeli),
+                            <code>Fast / Dynamic</code> (Hızlı/Enerjik).</li>
+                    </ul>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-num">AŞAMA 2: EMOTION WHEEL (KARAKTER DUYGU ÇARKI) KULLANIMI</span>
+                    <h3>Her Karaktere Ayrı Duygu ve Yoğunluk Atama</h3>
+                    <p>Sahnede yer alan karakterlerin (örneğin <code>@sienna</code> veya <code>@mark</code>) yüz
+                        ifadelerini ve ses tonlarını sadece prompta bırakmak yerine <strong>Emotion Wheel (Duygu
+                            Çarkı)</strong> menüsünden tek tek seçersiniz:</p>
+                    <ol style="margin-left:20px; color:var(--muted); font-size:0.9rem;">
+                        <li>Yönetmen panelinden <strong>Emotion Wheel</strong> sekmesine tıklayın.</li>
+                        <li>Sahnede tanımlı karakterinizi seçin (Sahnede birden fazla karakter varsa her birine farklı
+                            duygu verebilirsiniz!).</li>
+                        <li>Çark üzerinden ana duyguyu ve <strong>yoğunluk seviyesini (Intensity Level)</strong>
+                            işaretleyin:
+                            <ul>
+                                <li><strong>Neutral (Nötr):</strong> Sakin, ciddi ve dengeli kurumsal duruş.</li>
+                                <li><strong>Joy (Neşe) ➔ En Düşük Seviye: Serenity (Huzur/Memnuniyet) | Yüksek Seviye:
+                                        Ecstasy (Coşku):</strong> Örneğin karakterin hafif, huzurlu bir tebessümle
+                                    konuşması için <em>Joy</em> diliminin en alt kademesi olan <code>Serenity</code>
+                                    seçilir.</li>
+                                <li><strong>Sadness (Üzüntü/Yorgunluk), Anger (Öfke/Agresiflik), Fear (Endişe), Surprise
+                                        (Şaşkınlık):</strong> Düşükten yükseğe kademeli olarak seçilir.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+        </div>
+        <div class="module" id="view-5">
+<h1>3. Higgsfield'da Renk Nasıl Ayarlanır? (Colors & Özel Palet Oluşturma Menüsü)</h1>
+                <div class="ui-path">📍 Menü Yolu: [Video] ➔ Model: [Cinema Studio 3.5 / 4.0] ➔ [Colors] Sekmesi ➔
+                    [Create New Palette]</div>
+                <p>Videonun renk tonunu (Color Grading) rastgele bırakmamak için Higgsfield arayüzünde bulunan
+                    <strong>Colors (Renkler)</strong> menüsü kullanılır. Bu menüden hazır sinematik renk profilleri
+                    seçebileceğiniz gibi, kendi kurumsal renk paletinizi de kaydedebilirsiniz:</p>
+
+                <h2>Adım Adım Renk Paleti Ayarlama</h2>
+                <div class="grid-2">
+                    <div class="step-box">
+                        <span class="step-num">ADIM 1: COLORS MENÜSÜNÜ AÇIN</span>
+                        <p>Cinema Studio kontrol panelinde <strong>Camera</strong> ayarının hemen yanındaki
+                            <strong>Colors</strong> sekmesine tıklayın. Karşınıza hazır renk paletleri ve
+                            <code>+ New Palette</code> (Yeni Palet Oluştur) butonu çıkar.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-num">ADIM 2: ÖZEL PALET OLUŞTURUN</span>
+                        <p>Yeni bir palet oluşturup ona bir isim verin ve sahneye hakim olacak <strong>Ana Renkleri
+                                (Primary Colors)</strong> ve <strong>Vurgu Renklerini (Accent Tones)</strong> seçin:</p>
+                        <ul style="margin-left:18px; color:var(--muted); font-size:0.85rem;">
+                            <li><strong>Örnek 1 (Harvest Hour):</strong> Gün batımı sıcaklığı için <em>Warm Brown (Sıcak
+                                    Kahve)</em> ve <em>Gold (Altın)</em> tonları.</li>
+                            <li><strong>Örnek 2 (Violet Hour):</strong> Akşamüstü atmosferi için <em>Indigo, Violet
+                                    (Mor)</em> ile <em>Warm Apricot & Honey (Sıcak Kayısı/Bal)</em> dengesi.</li>
+                            <li><strong>Örnek 3 (Corporate Broadcast):</strong> Kurumsal stüdyo için <em>Deep Cobalt
+                                    Blue (Koyu Mavi), Clean White (Beyaz)</em> ve doğal sıcak ten tonu.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Görüntü Üretiminde (Image Mode) Stil ve Renk Seçimi</h2>
+                <p>Eğer <strong>Image</strong> sekmesinde çalışıyorsanız, alt çubuktaki boyut ayarının yanında yer alan
+                    <strong>General (Visual Style)</strong> açılır menüsüne tıklayarak görselin renk ve doku stilini
+                    üretmeden önce doğrudan menüden değiştirebilirsiniz.</p>
+        </div>
+        <div class="module" id="view-6">
+<h1>4. Kamera, Lens, Diyafram ve "Change Presets" Menüsü Nerede ve Nasıl Kullanılır?</h1>
+                <p>Higgsfield.ai'de kamera hareketlerini ve lensleri ayarlamanın <strong>iki farklı menü yolu</strong>
+                    vardır. Birincisi hazır kamera şablonları (Presets), ikincisi ise Cinema Studio'nun manuel
+                    kamera/lens menüsüdür:</p>
+
+                <h2>YÖNTEM 1: Video Sekmesindeki "Change" (Presets) Butonu</h2>
+                <div class="ui-path">📍 Menü Yolu: [Video] ➔ [Create Video] ➔ Görsel Kutusu Altındaki [Change] Butonu ➔
+                    Sağ Preset Paneli</div>
+                <p>Prompt kutusuna uzun kamera komutları yazmak istemediğinizde, yüklediğiniz görselin hemen altındaki
+                    <strong>Change (Değiştir)</strong> butonuna tıklayın. Ekranın <strong>sağ tarafında</strong>
+                    yüzlerce hazır kamera hareketinin bulunduğu <strong>Presets</strong> paneli açılır:</p>
+                <table>
+                    <tr>
+                        <th>Preset Kategorisi (Sağ Panel)</th>
+                        <th>İçindeki Seçilebilir Kamera Hareketleri</th>
+                        <th>Nasıl Çalışır?</th>
+                    </tr>
+                    <tr>
+                        <td><code>Basic Camera Control</code></td>
+                        <td><strong>Dolly In</strong> (İleri yaklaşma), <strong>Dolly Out</strong> (Geri çekilme),
+                            <strong>Pan Left/Right</strong>, <strong>Tilt Up/Down</strong>, <strong>Static</strong>.
+                        </td>
+                        <td>Seçtiğiniz hareket otomatik olarak ön-prompt (pre-prompt) haline gelir ve görselinize
+                            bağlanır.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Epic Camera Control</code></td>
+                        <td><strong>Crash Zoom</strong> (Ani sert yakınlaşma), <strong>Dolly Zoom (Vertigo)</strong>,
+                            <strong>FPV Drone Zoom</strong>, <strong>Dramatic Push-in</strong>, <strong>Crane
+                                Up</strong>.</td>
+                        <td>Dinamik reklam ve sosyal medya kancaları (hooks) için tek tıkla karmaşık kamera rotası
+                            uygular.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Effects & Trending</code></td>
+                        <td><strong>Street Colossus</strong>, <strong>Selfception</strong>, <strong>Studio
+                                Slide</strong>.</td>
+                        <td>Prompt bile yazmadan karakter kartınızı (Character Sheet) yükleyip doğrudan viral kamera
+                            efekti uygular.</td>
+                    </tr>
+                </table>
+
+                <h2>YÖNTEM 2: Cinema Studio "Camera" Menüsü (Gövde, Lens ve Diyafram Seçimi)</h2>
+                <div class="ui-path">📍 Menü Yolu: [Video] ➔ Model: [Cinema Studio 4.0] ➔ [Camera] Sekmesi</div>
+                <p>Cinema Studio 4.0 modelini seçtiğinizde açılan <strong>Camera</strong> menüsünde şu 3 donanım ayarını
+                    açılır menüden seçersiniz:</p>
+                <div class="grid-2">
+                    <div class="step-box">
+                        <span class="step-num">1. CAMERA BODY (Kamera Gövdesi)</span>
+                        <p><code>Modern</code> (Keskin, temiz dijital sinema kamerası netliği) veya
+                            <code>Vintage / Film</code> (35mm grenli analog film dokusu) seçilir.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-num">2. LENS & APERTURE (Lens ve Diyafram)</span>
+                        <p><strong>Lens:</strong> <code>Warm Vintage</code> (Sıcak sinematik parlama),
+                            <code>Clean Modern Prime</code> veya <code>Anamorphic</code>.<br>
+                            <strong>Aperture (Diyafram / Alan Derinliği):</strong> <code>Shallow</code> (Arka plan
+                            tamamen bulanık/bokeh), <code>Moderate</code> (Dengeli arka plan netliği) veya
+                            <code>Deep</code> (Ön ve arka plan tamamen net).
+                        </p>
+                    </div>
+                </div>
+
+                <h2>YÖNTEM 3: Çoklu Açı (Shots) ve Başlangıç/Bitiş Karesi (Start & End Frame)</h2>
+                <ul>
+                    <li><strong>Start and End Frame Kutuları:</strong> Video yükleme alanında hem <strong>Start Frame
+                            (İlk Kare)</strong> hem de <strong>End Frame (Son Kare)</strong> kutusuna iki farklı görsel
+                        yükleyip aradaki hareketi tarif ederseniz, kamera milimetrik olarak birinci kareden ikinci
+                        kareye gider.</li>
+                    <li><strong>Shots (Multiple Angles):</strong> Aynı sahneyi baştan kurmadan tek seferde farklı kamera
+                        açılarından (geniş, yakın, omuz üstü) üretmek için kullanılır.</li>
+                </ul>
+        </div>
+        <div class="module" id="view-7">
+<h1>4. Canvas (Inpaint), Popcorn (Storyboard) ve Vibe Motion Kullanımı</h1>
+                <p>Sadece metin yazarak (Text-to-Video) istediğimiz kusursuz sahneyi elde edemeyiz. Profesyonel iş
+                    akışı; önce görseli üretmek, hatalarını Canvas'ta düzeltmek ve onu videoya dönüştürmektir
+                    (Image-to-Video).</p>
+
+                <div class="grid-2">
+                    <div class="box">
+                        <span class="box-badge">Higgsfield Canvas / Inpaint</span>
+                        <h3>1. Set Üzerinde Cerrahi Müdahale</h3>
+                        <p>Ürettiğiniz stüdyo görselinde her şey harika ama masanın üzerindeki bilgisayar eksik veya
+                            arkadaki ekranda yanlış bir yazı mı var?</p>
+                        <ol style="margin-left:18px; color:var(--text-dim); font-size:0.88rem;">
+                            <li>Üst menüden <strong>Edit / Inpaint (Canvas)</strong> sekmesine geçin.</li>
+                            <li>Görseli yükleyin ve <strong>Brush (Fırça)</strong> ile sadece değişecek alanı boyayın.
+                            </li>
+                            <li>Prompt kutusuna sadece o bölgeye eklenecek nesneyi yazın.</li>
+                            <li>Böylece sahnenin geri kalanı %100 sabit kalırken sadece istediğiniz nesne değişir.</li>
+                        </ol>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">Vibe Motion (Image-to-Video)</span>
+                        <h3>2. Sabit Ekranı veya Tasarımı Canlandırma</h3>
+                        <p>Canlı bir web sayfasını veya grafik tasarımını yapay zekânın uydurmasını önlemek için gerçek
+                            ekran görüntüsünü kullanma yöntemidir:</p>
+                        <ol style="margin-left:18px; color:var(--text-dim); font-size:0.88rem;">
+                            <li>Gerçek ekran görüntüsünü <strong>Start Frame (Başlangıç Karesi)</strong> olarak
+                                yükleyin.</li>
+                            <li>Yazıların erimemesi için <strong>Motion Strength (Hareket Gücü)</strong> ayarını
+                                <em>Low-Medium</em> seviyesine çekin.
+                            </li>
+                            <li>Promptta sadece fare imlecinin (cursor) nereye tıklayacağını ve sayfanın nasıl
+                                kayacağını (smooth vertical scroll) tarif edin.</li>
+                        </ol>
+                    </div>
+                </div>
+
+<hr style='border:none; border-top:1px solid var(--border); margin:32px 0;'>
+
+<h1>6. Canvas, Inpaint, Video Object Remover ve Style (Stil) Menüsü Kullanımı</h1>
+                <div class="ui-path">📍 Menü Yolu: Üst Menüden [Edit Image / Inpaint] veya [Canvas] | Video İçin: [Video
+                    Edit] & [Style]</div>
+                <p>Ürettiğiniz bir görselde veya videoda masa üstündeki bir aksesuar unutulduğunda, logo bozulduğunda
+                    veya istenmeyen bir nesne çıktığında tüm sahneyi baştan üretip kredi yakmak yerine şu menüler
+                    kullanılır:</p>
+
+                <h2>A. Edit Image / Inpaint & Canvas (Görsel Onarım Menüsü)</h2>
+                <table>
+                    <tr>
+                        <th>Adım</th>
+                        <th>Menüdeki Buton / Araç</th>
+                        <th>Nasıl Kullanılır?</th>
+                    </tr>
+                    <tr>
+                        <td><strong>1. Model Seçimi</strong></td>
+                        <td>Üst menüden <code>Edit Image</code> veya <code>Inpaint</code> (Model:
+                            <code>nano_banana_pro_inpaint</code> / <code>Soul Inpaint</code>)</td>
+                        <td>Düzenlenecek stüdyo veya karakter görselini çalışma alanına yükleyin.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Maskeleme (Boyama)</strong></td>
+                        <td>Sol/Alt araç çubuğundaki <strong>Brush (Fırça)</strong> ve <strong>Brush Size (Fırça
+                                Boyutu)</strong></td>
+                        <td>Değiştirmek istediğiniz alanı (örneğin boş masa üstünü veya arkadaki LED ekranın içini)
+                            fırçayla boyayarak maskeleyin.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Komut ve Üretim</strong></td>
+                        <td>Alt Prompt Kutusu + <code>Generate</code></td>
+                        <td>Prompta tüm sahneyi değil, <strong>sadece boyadığınız yerde ne görünmesini
+                                istediğinizi</strong> yazın. Boyanmayan alanlar %100 kilitli kalır.</td>
+                    </tr>
+                </table>
+
+                <h2>B. Video Edit (Videodan Nesne Silme) & Style (Stil Değiştirme) Menüsü</h2>
+                <div class="grid-2">
+                    <div class="step-box">
+                        <span class="step-num">AI OBJECT & CLUTTER REMOVER (Video Edit)</span>
+                        <p>Üretilen videoda masada fazladan bir bardak veya arka planda istenmeyen bir nesne mi var?
+                            <strong>Video Edit</strong> menüsüne girin, videoyu yükleyin ve prompt kutusuna silinmesini
+                            istediğiniz nesneyi yazın. Yapay zekâ nesneyi siler ve arkasındaki arka planı otomatik
+                            tamamlar.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-num">VIDEO STYLE (Video-to-Video Stil Dönüştürücü)</span>
+                        <p>Mevcut bir videonun kamera hareketini ve oyuncularını hiç değiştirmeden sadece görsel
+                            dünyasını değiştirmek için: Video ekranında <strong>Style</strong> butonuna tıklayın. Açılan
+                            listeden <code>Knitted World</code> (Örgü dünya), <code>Puppets</code> veya
+                            <code>Chunky Textured Low Poly</code> (Oyun bloğu stili) seçip kaliteyi <code>1080p</code>
+                            yaparak <code>Generate</code>'e basın.</p>
+                    </div>
+                </div>
+        </div>
+        <div class="module" id="view-8">
+<h1>5. Sanat Yönetmenliği (Production Design): Mekân, Set ve Dekor</h1>
+                <p>Bir film yönetmeni çekime başlamadan önce boş film setini kurar. Higgsfield'da da kural aynıdır:
+                    <strong>Mekânlar her zaman içinde hiç insan olmadan (empty of people) üretilir ve <code>@loc</code>
+                        olarak kaydedilir.</strong>
+                </p>
+
+                <h2>Mekân Tasarımının 4 Yapı Taşı</h2>
+                <table>
+                    <tr>
+                        <th>Unsur</th>
+                        <th>Sinematik İşlevi</th>
+                        <th>Prompt Terimleri (İngilizce & Türkçe)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>1. Mimari & Derinlik</strong></td>
+                        <td>Düz bir duvar yerine ön plan (foreground), orta plan (midground) ve arka plan (background)
+                            katmanları oluşturmak.</td>
+                        <td><code>Foreground presentation desk, midground glass partitions, background large curved LED wall</code>
+                            (Ön planda masa, orta planda cam bölmeler, arkada dev LED duvar)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Yüzey ve Materyal</strong></td>
+                        <td>Işığın nasıl yansıyacağını belirler (Mat ahşap, parlak mermer, fırçalanmış metal).</td>
+                        <td><code>Warm walnut wood panels, matte black steel frame, polished concrete floor with subtle reflections</code>
+                            (Ceviz ağacı paneller, mat siyah çelik, hafif yansımalı zemin)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Sahne Aksesuarları (Props)</strong></td>
+                        <td>Mekâna yaşanmışlık ve gerçekçilik katan masa üstü objeler.</td>
+                        <td><code>Sleek aluminum laptop, gooseneck condenser microphone, glass tablet, minimal ceramic coffee cup</code>
+                            (Alüminyum laptop, kürsü mikrofonu, tablet, seramik fincan)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Boş Set Kuralı</strong></td>
+                        <td>Sonradan eklenecek karakterlerle çakışmaması için sette insan olmamalıdır.</td>
+                        <td><code>Real photo taken on an empty film set, completely devoid of people</code> (Boş bir
+                            film setinde çekilmiş gerçek fotoğraf, tamamen insansız)</td>
+                    </tr>
+                </table>
+        </div>
+        <div class="module" id="view-9">
+<h1>6. Kostüm, Makyaj ve Casting: Karakter Yaratımı (@Elements)</h1>
+                <p>Sinemada oyuncunun yüzü, saç kesimi, makyajı ve kostümü karakterin kimliğini anlatır. Yapay zekâda
+                    oyuncunun her planda aynı kalması için <strong>3 Panelli Karakter Kartı (Character Sheet)</strong>
+                    ve <strong>Soul ID</strong> kullanılır.</p>
+
+                <h2>1. Kostüm ve Makyaj (Wardrobe & Make-up) Sözlüğü</h2>
+                <div class="grid-3">
+                    <div class="box">
+                        <h3>Kostüm Dokusu (Fabric)</h3>
+                        <p>4K çözünürlükte kumaşın gerçek durması için dokusunu belirtin:<br>
+                            <code>Crisp tailored cotton blouse</code> (Ütülü net pamuklu gömlek),
+                            <code>fine merino wool sweater</code> (ince merinos yün kazak),
+                            <code>structured charcoal blazer</code> (yapılı анtrasit ceket).
+                        </p>
+                    </div>
+                    <div class="box">
+                        <h3>Cilt ve Makyaj (Skin/Make-up)</h3>
+                        <p>Plastik yapay zekâ cildini önlemek için:<br>
+                            <code>Natural skin texture with visible pores, subtle professional studio make-up, matte finish, realistic catchlights in eyes</code>
+                            (Gözenekleri görünen doğal cilt, mat stüdyo makyajı, gözlerde gerçekçi ışık parlaması).
+                        </p>
+                    </div>
+                    <div class="box">
+                        <h3>Saç Tasarımı (Hair Styling)</h3>
+                        <p>Sahneler arası saçın dağılmaması için:<br>
+                            <code>Neatly styled shoulder-length dark brown hair, tucked behind one ear, natural flyaway strands under backlight</code>
+                            (Özenle şekillendirilmiş omuz hizasında saç, arka ışıkta doğal saç telleri).
+                        </p>
+                    </div>
+                </div>
+
+                <h2>2. Kafasız Ön Gövde (Headless Front View) Tekniği</h2>
+                <p>3 panelli karakter kartı üretirken <strong>Sol panelde boydan ön görünümün kafasız/boş
+                        bırakılması</strong>, orta panelin boydan arka görünüm, sağ panelin ise göğüs üstü büyük yüz
+                    portresi olması; yapay zekânın küçük boydan yüz ile büyük portre yüzünü birbirine karıştırmasını
+                    (pixel blending) kesin olarak engeller.</p>
+        </div>
+        <div class="module" id="view-10">
+<h1>7. Görüntü Yönetmenliği (DOP): Çekim Ölçekleri, Açılar, Hareketler ve Lensler</h1>
+                <p>Kamerayı nereye koyduğunuz, hangi lensi taktığınız ve kamerayı nasıl hareket ettirdiğiniz izleyicinin
+                    bilinçaltını yönetir (Ders 6 - 20 Sayfalık Kamera Rehberi tamamı):</p>
+
+                <h2>A. Çekim Ölçekleri (Shot Sizes - Kadraj Ne Kadar Yakın?)</h2>
+                <table>
+                    <tr>
+                        <th>İngilizce Komut</th>
+                        <th>Türkçe Sinema Terimi</th>
+                        <th>Yönetmenlik Amacı</th>
+                    </tr>
+                    <tr>
+                        <td><code>Extreme Wide Shot (EWS)</code></td>
+                        <td>Çok Geniş Plan (Kurucu Plan)</td>
+                        <td>Sahnenin geçtiği dünyayı/mekânı tanıtmak için açılışta kullanılır.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Full-Body / Wide Shot (WS)</code></td>
+                        <td>Boydan Tam Plan</td>
+                        <td>Oyuncunun baştan ayağa duruşunu, kostümünü ve mekân içindeki yerini gösterir.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Medium Full / Cowboy Shot</code></td>
+                        <td>Diz Üstü Plan</td>
+                        <td>Oyuncunun hem el/kol jestlerini hem de yürüyüşünü aynı anda yakalar.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Medium Shot (MS)</code></td>
+                        <td>Orta Plan (Bel Üstü)</td>
+                        <td>Diyalog ve sunum sahnelerinin standart, en doğal ölçeğidir.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Medium Close-Up (MCU)</code></td>
+                        <td>Orta Yakın Plan (Göğüs/Omuz Üstü)</td>
+                        <td>İzleyiciyi oyuncunun duygusuna ve konuşmasına (lip-sync) odaklar.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Close-Up (CU) / Extreme Close-Up (ECU)</code></td>
+                        <td>Yakın Plan / Çok Yakın Detay</td>
+                        <td>Sadece yüzü (CU) veya sadece gözleri, parmağın fareye tıklamasını (ECU) büyütür.</td>
+                    </tr>
+                </table>
+
+                <h2>B. Kamera Açıları (Camera Angles - Kamera Hangi Yükseklikte?)</h2>
+                <table>
+                    <tr>
+                        <th>İngilizce Komut</th>
+                        <th>Türkçe Sinema Terimi</th>
+                        <th>Psikolojik Etkisi</th>
+                    </tr>
+                    <tr>
+                        <td><code>Eye-Level Angle</code></td>
+                        <td>Göz Hizası</td>
+                        <td>Tarafsız, samimi ve güven verici iletişim.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Low Angle Shot</code></td>
+                        <td>Alt Açı (Kameradan Yukarı Bakış)</td>
+                        <td>Karakteri kahraman, güçlü, lider ve baskın gösterir.</td>
+                    </tr>
+                    <tr>
+                        <td><code>High Angle / Overhead Bird's-Eye</code></td>
+                        <td>Üst Açı / Kuşbakışı Tepe Açısı</td>
+                        <td>Karakteri savunmasız/bunalmış gösterir veya masanın üzerindeki tüm düzeni tepeden sergiler.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Over-the-Shoulder (OTS)</code></td>
+                        <td>Omuz Üstü Plan</td>
+                        <td>Bir karakterin omzunun arkasından diğer karaktere veya bilgisayar ekranına bakış.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Point of View (POV)</code></td>
+                        <td>Öznel Bakış Açısı</td>
+                        <td>İzleyicinin doğrudan karakterin kendi gözünden ekranı veya dünyayı görmesi.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Dutch Angle / Tilted Frame</code></td>
+                        <td>Eğik Kadraj</td>
+                        <td>Huzursuzluk, kriz, şaşkınlık veya sıra dışı enerjik anlar yaratır.</td>
+                    </tr>
+                </table>
+
+                <h2>C. Fiziksel Kamera Hareketleri ve Lens Yasası (Camera Law)</h2>
+                <table>
+                    <tr>
+                        <th>Hareket / Lens Komutu</th>
+                        <th>Türkçe Karşılığı</th>
+                        <th>Sahnedeki Etkisi</th>
+                    </tr>
+                    <tr>
+                        <td><code>Smooth Dolly In / Push-In</code></td>
+                        <td>Ray Üzerinde İleri Yakınlaşma</td>
+                        <td>Kamera fiziksel olarak özneye yaklaşır; konuşmanın önemini artırır (Zoom'dan farklıdır,
+                            perspektif derinleşir).</td>
+                    </tr>
+                    <tr>
+                        <td><code>Dolly Out / Pull-Back</code></td>
+                        <td>Geri Çekilme</td>
+                        <td>Detaydan başlayıp geriye çekilerek tüm ortamı ortaya çıkarır.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Pan Left / Pan Right</code></td>
+                        <td>Yatay Çevrinme</td>
+                        <td>Kamera olduğu yerde sağa/sola dönerek bakışı oyuncudan ekrana taşır.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Tilt Up / Tilt Down</code></td>
+                        <td>Dikey Çevrinme</td>
+                        <td>Kameranın aşağıdan yukarıya veya yukarıdan aşağıya süzülmesi.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Tracking / Steadicam Follow</code></td>
+                        <td>Takip Çekimi</td>
+                        <td>Yürüyen karakterle birlikte sarsıntısız akıcı hareket.</td>
+                    </tr>
+                    <tr>
+                        <td><code>Rack Focus (Focus Pull)</code></td>
+                        <td>Odak Kaydırma</td>
+                        <td>Ön plandaki nesneyi bulanıklaştırıp arka plandaki karakteri/ekranı netleştirme.</td>
+                    </tr>
+                    <tr>
+                        <td><code>16mm / 24mm / 35mm / 50mm / 85mm Anamorphic</code></td>
+                        <td>Lens Odak Uzaklıkları</td>
+                        <td><strong>24mm:</strong> Geniş mekân derinliği. <strong>50mm:</strong> Doğal insan gözü.
+                            <strong>85mm f/1.4:</strong> Arka planı tamamen eriten (bokeh) sinematik portre lensi.
+                        </td>
+                    </tr>
+                </table>
+
+<hr style='border:none; border-top:1px solid var(--border); margin:32px 0;'>
+
+<h1>8. Çekim Ölçekleri, Kamera Açıları ve Hareketleri (Türkçe & İngilizce Tam Sözlük)</h1>
+                <p>Hem sağ paneldeki <strong>Presets</strong> menüsünden seçebileceğiniz hem de prompt içine
+                    yazabileceğiniz tüm kamera komutları:</p>
+                <table>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>İngilizce Komut / Preset Adı</th>
+                        <th>Türkçe Karşılığı ve Kullanım Amacı</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Çekim Ölçeği</strong></td>
+                        <td><code>Extreme Wide Shot (EWS)</code> / <code>Full-Body Shot</code></td>
+                        <td>Çok Geniş Plan / Boydan Tam Plan (Mekânı ve karakterin tam duruşunu gösterir).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Çekim Ölçeği</strong></td>
+                        <td><code>Medium Shot (MS)</code> / <code>Medium Close-Up (MCU)</code></td>
+                        <td>Bel Üstü Orta Plan / Göğüs Üstü Yakın Plan (Sunum ve konuşma için idealdir).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Çekim Ölçeği</strong></td>
+                        <td><code>Close-Up (CU)</code> / <code>Extreme Close-Up (ECU)</code></td>
+                        <td>Yüz Yakın Plan / Göz veya Fare Tıklaması Detay Planı.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kamera Açısı</strong></td>
+                        <td><code>Eye-Level</code> / <code>Low Angle</code> / <code>High Angle</code></td>
+                        <td>Göz Hizası (Samimi) / Alt Açı (Güçlü) / Üst Açı (Genel görünüm veya bunalmışlık).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kamera Açısı</strong></td>
+                        <td><code>Over-the-Shoulder (OTS)</code> / <code>POV</code></td>
+                        <td>Omuz Üstü Ekran Bakışı / Karakterin Gözünden Bakış.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kamera Hareketi</strong></td>
+                        <td><code>Smooth Dolly In (Push-in)</code> / <code>Dolly Out</code></td>
+                        <td>Kameranın özneye doğru akıcı yaklaşması / Geriye doğru açılması.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kamera Hareketi</strong></td>
+                        <td><code>Pan Left / Right</code> & <code>Tilt Up / Down</code></td>
+                        <td>Kameranın sağa-sola veya yukarı-aşağı dönerek kadrajı değiştirmesi.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kamera Hareketi</strong></td>
+                        <td><code>Tracking Shot</code> / <code>Crane Up</code></td>
+                        <td>Karakterle birlikte yürüme (Tracking) / Vinçle yukarı yükselme (Crane Up).</td>
+                    </tr>
+                </table>
+        </div>
+        <div class="module" id="view-11">
+<h1>8. Işık Şefliği (Gaffing) ve Renk Düzenleme (Color Grading)</h1>
+                <p>Sinema "ışıkla resim yapma" sanatıdır. Prompt içinde ışığın yönünü, sertliğini ve renk sıcaklığını
+                    (Kelvin) belirtmezseniz yapay zekâ düz ve ruhsuz bir görüntü üretir.</p>
+
+                <div class="grid-2">
+                    <div class="box">
+                        <span class="box-badge">Işık Kurulumları (Lighting Setups)</span>
+                        <h3>1. Işığın Yönü ve Kalitesi</h3>
+                        <ul style="margin-left:16px; color:var(--text-dim); font-size:0.88rem;">
+                            <li><strong>Three-Point Studio Lighting:</strong> Ana ışık (Key light), dolgu ışığı (Fill
+                                light) ve arka kontur ışığından (Rim/Backlight) oluşan en kusursuz televizyon/stüdyo
+                                aydınlatması.</li>
+                            <li><strong>Soft Diffused Key Light:</strong> Yüzdeki kırışıklıkları ve sert gölgeleri
+                                yumuşatan büyük softbox ışığı.</li>
+                            <li><strong>Chiaroscuro / High-Contrast Moody:</strong> Karanlık ve aydınlığın keskin
+                                çatışması (Dramatik ve sinematik sahneler).</li>
+                            <li><strong>Practical Lights & Screen Glow:</strong> Sahnenin içindeki masa lambası, neon
+                                tabela veya <em>dizüstü bilgisayar ekranından oyuncunun yüzüne yansıyan dinamik
+                                    mavi/beyaz ışık (interactive screen reflection on face)</em>.</li>
+                            <li><strong>Volumetric Lighting / God Rays:</strong> Pencereden süzülen, havadaki
+                                toz/atmosferle görünür olan ışık hüzmeleri.</li>
+                        </ul>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">Renk Paleti (Color Grading)</span>
+                        <h3>2. Renk Atmosferi ve Kontrast</h3>
+                        <ul style="margin-left:16px; color:var(--text-dim); font-size:0.88rem;">
+                            <li><strong>Clean Broadcast Blue & Warm Skin Tones:</strong> Arka planda modern teknoloji
+                                mavisi, oyuncunun yüzünde ise sağlıklı ve sıcak ten rengi dengesi.</li>
+                            <li><strong>Teal and Orange Blockbuster Grade:</strong> Hollywood filmlerinin standart zıt
+                                renk kontrastı.</li>
+                            <li><strong>Warm Golden Hour (3200K):</strong> Samimi, iyimser ve davetkâr gün batımı
+                                sıcaklığı.</li>
+                            <li><strong>Cool Daylight / Clinical (5600K-6500K):</strong> Ciddi, analitik, yüksek
+                                teknoloji ve plazalar için soğuk beyaz/mavi ton.</li>
+                            <li><strong>Muted Desaturated Film Look:</strong> Renk doygunluğu kısılmış, 35mm Kodak film
+                                greni (subtle film grain) eklenmiş sanatsal ton.</li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+        <div class="module" id="view-12">
+<h1>9. Reji ve Oyunculuk Yönetimi: Duygu, Janr (Komedi/Dram) ve Mizansen</h1>
+                <p>Oyuncuya (karaktere) sadece "konuş" demek yetmez; <strong>nasıl bir duyguyla, hangi yüz alt-metniyle
+                        ve hangi beden diliyle (blocking)</strong> oynayacağını yönetmen olarak siz söylemelisiniz:</p>
+
+                <table>
+                    <tr>
+                        <th>Janr / Duygu Tonu</th>
+                        <th>Oyunculuk ve Mimik Komutları (İngilizce)</th>
+                        <th>Türkçe Reji Karşılığı</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Komedi / İroni / Mizah</strong></td>
+                        <td><code>Lighthearted comedic timing, raised eyebrow with a knowing smirk, exasperated sigh followed by a witty grin, expressive body language</code>
+                        </td>
+                        <td>Hafif mizahi zamanlama, tek kaşını kaldırıp bilmişçe gülümseme, bıkkın bir nefes verişin
+                            ardından zeki bir tebessüm, hareketli beden dili.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dram / Empati / Gerilim</strong></td>
+                        <td><code>Subtle emotional micro-expressions, weary eyes, hesitant posture transitioning into quiet relief and hopeful realization</code>
+                        </td>
+                        <td>İnce duygusal mikro mimikler, yorgun bakışlar, tereddütlü duruşun yavaşça içsel bir
+                            rahatlama ve umuda dönüşmesi.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Karizmatik Lider / Güven</strong></td>
+                        <td><code>Calm authoritative presence, steady direct eye contact, natural hand gestures emphasizing key points, warm approachable smile</code>
+                        </td>
+                        <td>Sakin ve otoriter duruş, kameraya doğrudan güven veren göz teması, konuşmayı destekleyen
+                            doğal el hareketleri, samimi gülümseme.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Enerjik / Heyecanlı (UGC)</strong></td>
+                        <td><code>High-energy enthusiastic delivery, leaning slightly toward the lens as if sharing an exciting secret, vibrant facial animation</code>
+                        </td>
+                        <td>Yüksek enerjili coşkulu anlatım, heyecanlı bir sır paylaşıyormuş gibi kameraya hafifçe
+                            eğilme, canlı yüz ifadeleri.</td>
+                    </tr>
+                </table>
+        </div>
+        <div class="module" id="view-13">
+<h1>10. Ses Yönetmenliği (Sound Design): Diyalog, Lip-Sync, Foley ve Ortam Sesi</h1>
+                <p>Sinemanın %50'si sestir. Higgsfield'ın <strong>Seedance 2.5</strong> motoru, <strong>Lipsync
+                        Studio</strong> ve harici <strong>ElevenLabs</strong> entegrasyonu ile ses üç katmanda
+                    yönetilir:</p>
+
+                <div class="grid-3">
+                    <div class="box">
+                        <span class="box-badge">1. Diyalog & Lip-Sync</span>
+                        <h3>Konuşma ve Nefes</h3>
+                        <p>Prompt içinde konuşmacıyı net atayın:
+                            <code>She speaks in clear, natural English: '...'</code>.<br><br>
+                            <strong>Profesyonel İpucu:</strong> Çok dilli veya kusursuz tonlamalı projelerde sesi önce
+                            <strong>ElevenLabs</strong>'te (nefes aralıkları ve vurgu ayarlarıyla) üretin, ardından
+                            Higgsfield'a ses referansı olarak yükleyin veya <strong>Lipsync Studio</strong> ile videoya
+                            giydirin.
+                        </p>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">2. Ortam Sesi (Ambience)</span>
+                        <h3>Mekânın Akustiği</h3>
+                        <p>Tamamen sağır bir sessizlik yapay durur. <code>05 / GRADE AND AUDIO</code> bölümüne mutlaka
+                            ortam tınısını ekleyin:<br>
+                            <code>Quiet broadcast studio room tone</code> (Sessiz stüdyo oda tınısı) veya
+                            <code>Soft background cafe murmur and distant espresso machine</code> (Hafif kafe uğultusu).
+                        </p>
+                    </div>
+                    <div class="box">
+                        <span class="box-badge">3. Foley & Efekt (SFX)</span>
+                        <h3>Fiziksel Eylem Sesleri</h3>
+                        <p>Karakterin yaptığı hareketin ses karşılığı gerçekçiliği ikiye katlar:<br>
+                            <code>Subtle keyboard tap, crisp mouse click sound, gentle rustle of fabric as she sits down</code>
+                            (Hafif klavye tuşu, net fare tıklama sesi, otururken çıkan hafif kumaş hışırtısı).
+                        </p>
+                    </div>
+                </div>
+
+<hr style='border:none; border-top:1px solid var(--border); margin:32px 0;'>
+
+<h1>5. Ses (Audio), Ses Referansı Atama, ElevenLabs ve Lipsync Studio Kullanımı</h1>
+                <p>Higgsfield'da karakterleri konuşturmak, ortam sesi eklemek ve kusursuz dudak senkronizasyonu
+                    (lip-sync) yapmak için kullanılan <strong>3 farklı ses yöntemi</strong> ve menü adımları:</p>
+
+                <div class="step-box">
+                    <span class="step-num">YÖNTEM 1: VİDEO İLE BİRLİKTE DOĞRUDAN SES VE KONUŞMA ÜRETME</span>
+                    <div class="ui-path">📍 Menü Yolu: [Video / Cinema Studio] ➔ Alt Çubukta [Audio: ON] ➔ Prompt İçine
+                        Diyalog Yazımı</div>
+                    <ol style="margin-left:20px; color:var(--muted); font-size:0.9rem;">
+                        <li>Alt parametre çubuğundaki <strong>Audio (Ses)</strong> butonunu <strong>ON (Açık)</strong>
+                            konumuna getirin.</li>
+                        <li>Karakterinize özel bir ses tonu veya aksan vermek istiyorsanız, <strong>Upload Zone</strong>
+                            (Yükleme Alanı) içindeki <strong>3 Audio Track</strong> slotundan birine örnek bir ses kaydı
+                            yükleyin ve bu sesi <code>@karakter</code> etiketinizle eşleştirin (Karakterin kayıttaki
+                            kelimeleri tekrar etmesi gerekmez, sadece ses rengini alır!).</li>
+                        <li>Promptun içine karakterin söyleyeceği repliği tırnak içinde yazın. Video üretildiğinde
+                            konuşma ve ortam sesi videoyla birleşik çıkar.</li>
+                    </ol>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-num">YÖNTEM 2: ELEVENLABS + HIGGSFIELD LIPSYNC STUDIO (KUSURSUZ ÇOK DİLLİ
+                        SENKRON)</span>
+                    <div class="ui-path">📍 Menü Yolu: ElevenLabs ➔ Ses İndir (.mp3/.wav) ➔ Higgsfield Üst Menü
+                        [Studios] ➔ [Lipsync Studio]</div>
+                    <p>Özellikle Türkçe konuşmalarda veya "Lobox" gibi özel marka isimlerinin telaffuzunda hata olmaması
+                        için uygulanan profesyonel stüdyo akışı:</p>
+                    <ol style="margin-left:20px; color:var(--muted); font-size:0.9rem;">
+                        <li><strong>ElevenLabs Hazırlığı:</strong> ElevenLabs paneline girin. Standart düz okuma yerine
+                            <strong>Voice Settings</strong> kısmından nefes aralıklarını, <em>Stability</em> (Denge),
+                            <em>Clarity</em> ve konuşma efektlerini ayarlayıp ses dosyasını indirin.</li>
+                        <li><strong>Lipsync Studio'ya Giriş:</strong> Higgsfield üst menüsünden <strong>Lipsync
+                                Studio</strong> sekmesini açın.</li>
+                        <li><strong>Eşleştirme ve Render:</strong> Sol kutuya sessiz (veya dudakları kapalı/doğal)
+                            ürettiğiniz karakter videosunu/görselini yükleyin. Sağ kutuya ElevenLabs'ten aldığınız ses
+                            dosyasını yükleyin ve <strong>Generate</strong> tuşuna basın. Yapay zekâ sadece ağız ve çene
+                            kaslarını o sese göre yeniden işler.</li>
+                    </ol>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-num">YÖNTEM 3: ÇOK DİLLİ DIŞ SES (VOICEOVER) STRATEJİSİ</span>
+                    <p>Aynı videoyu hem Türkçe hem İngilizce hem de Almanca/İspanyolca/Fransızca yayınlamak için:
+                        Karakteri ekranda konuşurken (lip-sync) sadece kısa giriş cümlesinde gösterin, ardından kamerayı
+                        bilgisayar/projeksiyon ekranına kaydırın. Karakter kadrajdan çıktığında ElevenLabs ile
+                        ürettiğiniz her dildeki dış sesi kurgu programında (DaVinci Resolve / CapCut) görüntü üzerine
+                        yerleştirin.</p>
+                </div>
+        </div>
+        <div class="module" id="view-14">
+<h1>11. Kurgu (Editing), Zaman Kontrolü ve Sahneler Arası Süreklilik (Continuity)</h1>
+                <p>Bir sahnede masanın üzerinde duran kahve fincanının ikinci saniyede kaybolmaması veya kameranın kesme
+                    (cut) yaparken oyuncunun yönünü şaşırmaması için <strong>Devamlılık (Continuity)</strong> ve
+                    <strong>Zaman Kodlaması (Time-Stamping)</strong> kullanılır:
+                </p>
+
+                <h2>1. Zaman Aralıklı Çekim Yazımı (Time-Range Shot Blocking)</h2>
+                <p>10 veya 15 saniyelik bir videoda her şeyin birbirine girmesini önlemek için promptu saniyelere bölün:
+                </p>
+                <div class="code-panel">
+                    <div class="en-text">[00:00 - 00:05] Shot 1: Medium shot of @char seated at the desk, looking at her
+                        laptop, then looking up at the camera and speaking.<br>
+                        [00:05 - 00:10] Shot 2: Smooth pan and push-in to the large background LED screen as it
+                        transitions from the logo to the web interface.<br>
+                        [00:10 - 00:15] Shot 3: Tight locked-off view of the screen as a mouse cursor moves and clicks
+                        the registration button.</div>
+                    <div class="tr-text"><strong>Türkçe Mantığı:</strong> 0-5. saniyeler arası 1. Plan (Oyuncu konuşur),
+                        5-10. saniyeler arası 2. Plan (Kamera ekrana kayar ve yaklaşır), 10-15. saniyeler arası 3. Plan
+                        (Ekrandaki fare tıklaması).</div>
+                </div>
+
+                <h2>2. Kısıtlamalar Yasası (06 / CONSTRAINTS)</h2>
+                <p>Yapay zekânın kafasına göre ekstra insan, el veya nesne uydurmasını engellemek için promptun en
+                    sonuna mutlaka şu güvenlik kilidini ekleyin:<br>
+                    <code>CONSTRAINTS: Single continuous take (or clean specified cuts), strictly one visible character, desk props remain in exact position, no morphing text, no extra limbs.</code>
+                </p>
+
+<hr style='border:none; border-top:1px solid var(--border); margin:32px 0;'>
+
+<h1>7. Akıcı Web Sayfası / Program Çalışması Gösterim Videosu: Ön Hazırlık, Ayarlar ve Render</h1>
+                <div class="ui-path">📍 Tam İş Akışı: Ekran Görüntüsü ➔ Canvas ➔ Image-to-Video (Vibe Motion) ➔ Upscale
+                    4K ➔ DaVinci Resolve</div>
+                <p>Bir web sitesinin veya yazılım arayüzünün (örneğin şirket kayıt ekranının) stüdyodaki projeksiyon
+                    ekranında veya tam ekranda <strong>piksel dağılması olmadan, yazılar bozulmadan akıcı bir şekilde
+                        çalışıyormuş gibi</strong> gösterilmesi için uygulanacak 5 aşamalı tam prodüksiyon rehberi:</p>
+
+                <div class="step-box">
+                    <span class="step-num">AŞAMA 1: ÖN HAZIRLIK (GERÇEK ARAYÜZÜN HAZIRLANMASI)</span>
+                    <p>Higgsfield.ai metin algılarken pikselleri dağıtabildiği ve var olmayan bir web sayfasını
+                        uyduracağı için önce gerçek arayüz görseli hazırlanır:</p>
+                    <ul style="margin-left:20px; color:var(--muted); font-size:0.9rem;">
+                        <li>Tarayıcınızdan veya Figma'dan web sayfasının yüksek çözünürlüklü (1920x1080 veya 4K) net
+                            ekran görüntüsünü (PNG) alın.</li>
+                        <li>Eğer bu ekran önce stüdyoda Sienna'nın arkasındaki dev ekranda görünecekse; <strong>Canvas /
+                                Inpaint</strong> menüsünde stüdyo görselinin LED ekranını boyayıp bu ekran görüntüsünü
+                            oraya yerleştirin ve bunu <strong>2. Sahnenin Başlangıç Karesi (Start Frame)</strong> olarak
+                            kaydedin.</li>
+                    </ul>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-num">AŞAMA 2: HIGGSFIELD VIBE MOTION (IMAGE-TO-VIDEO) PANEL AYARLARI</span>
+                    <p>Üst menüden <strong>Video ➔ Image-to-Video</strong> sekmesine geçin ve şu ayarları birebir yapın:
+                    </p>
+                    <ol style="margin-left:20px; color:var(--muted); font-size:0.9rem;">
+                        <li><strong>Start Frame (Başlangıç Karesi):</strong> Hazırladığınız yüksek çözünürlüklü web
+                            arayüzü ekran görüntüsünü ilk kutuya yükleyin.</li>
+                        <li><strong>Model Seçimi:</strong> Arayüz keskinliğini ve mikro hareketleri en iyi koruyan
+                            <strong>Minimax Hailuo</strong> veya <strong>Seedance 2.5</strong> modelini seçin.</li>
+                        <li><strong>Motion Strength (Vibe / Hareket Gücü Slider'ı):</strong> Paneldeki hareket gücü
+                            çubuğunu kesinlikle yüksek bırakmayın! Yazıların ve logoların erimemesi için <strong>Low -
+                                Medium (Düşük - Orta)</strong> seviyesine çekin.</li>
+                        <li><strong>Duration & Bitrate:</strong> İlk test için süreyi <strong>4s - 5s</strong>, Bitrate
+                            ayarını ise <strong>High</strong> yapın.</li>
+                    </ol>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-num">AŞAMA 3: ARAYÜZ ÇALIŞTIRMA PROMPTU VE RENDER ALMA</span>
+                    <p>Prompt kutusuna arayüzdeki fare hareketini, buton tıklamasını ve sayfa kaydırmasını net olarak
+                        yazıp <strong>Generate</strong> butonuna basın:</p>
+                    <div class="prompt-card">
+                        <button class="copy-btn" onclick="copyPrompt(this)">Kopyala</button>
+                        <div class="p-en">Locked-off flat screen view of the web interface. Smooth vertical scroll down
+                            the landing page. A computer mouse cursor moves steadily toward the 'Company Registration'
+                            button, clicks it, and the button flashes gently and scales down slightly as if clicked.
+                            High UI fidelity, sharp text, no distortion.</div>
+                        <div class="p-tr"><strong>Türkçe Karşılığı:</strong> Web arayüzünün sabit düz ekran görünümü.
+                            Sayfada aşağı doğru pürüzsüz kaydırma. Fare imleci 'Şirket Kaydı' butonuna doğru kararlı
+                            şekilde ilerler, tıklar ve buton tıklanmış gibi hafifçe parlayıp küçülür. Yüksek arayüz
+                            netliği.</div>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <span class="step-num">AŞAMA 4: HIGGSFIELD UPSCALE 4K & DAVINCI RESOLVE COMPOSITING (NİHAİ
+                        NETLİK)</span>
+                    <p>Render bittikten sonra ekran yazılarının cam gibi okunması için iki yöntem uygulanır:</p>
+                    <ul style="margin-left:20px; color:var(--muted); font-size:0.9rem;">
+                        <li><strong>Higgsfield İçi Çözüm:</strong> Üretilen videonun altındaki <strong>Enhance /
+                                Upscale</strong> butonuna tıklayın ve videoyu <strong>4K</strong> çözünürlüğe
+                            yükselterek bulanıklaşan ikon ve metinleri keskinleştirin.</li>
+                        <li><strong>Sıfır Hatalı Kurgu Çözümü (DaVinci Resolve):</strong> Sienna'nın stüdyoda kameraya
+                            bakıp bilgisayarına döndüğü sahneyi Higgsfield'da üretin. Kamera ekrana yaklaştığı anda (5.
+                            saniyede) kurgu programı <strong>DaVinci Resolve</strong> üzerinde gerçek ekran kaydını
+                            (Screen Recording) tam ekran veya ekran içine (Corner Pin / Planar Tracker ile) yerleştirip
+                            arkasına ElevenLabs'te üretilen sesi koyun. Bu yöntem %100 gerçek metin netliği ve sıfır
+                            kredi kaybı sağlar!</li>
+                    </ul>
+                </div>
+        </div>
+        <div class="module" id="view-15">
+<div class="academy-container">
+    <div style="background:var(--bg-panel); border:1px solid var(--border); border-radius:10px; padding:20px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid var(--border); padding-bottom:14px; margin-bottom:16px;">
+            <div>
+                <h1 style="font-size:1.6rem; color:var(--text); margin:0;">🎓 Higgsfield Academy Resmi Müfredatı (Ders 1 - 8)</h1>
+                <p style="margin:4px 0 0; color:var(--text-dim); font-size:0.88rem;">10 Resmi PDF Rehberinin ve Video Derslerinin Tam Türkçe Özeti, Glosarı, Formülleri ve Çalışan Resmi Video Linkleri.</p>
+            </div>
+            <span class="tag" style="background:var(--accent); color:#000; font-weight:bold; font-size:0.75rem; padding:4px 10px;">Doğrulanmış Video Bağlantıları</span>
+        </div>
+
+        <!-- 8 DERS YATAY GEZİNTİ BUTONLARI -->
+        <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:8px;" id="acad_buttons">
+
+            <button onclick="showAcadLesson(1)" id="acad-tab-1" class="btn btn-lime" style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 01: İlk Videonuz
+            </button>
+    
+            <button onclick="showAcadLesson(2)" id="acad-tab-2" class="btn " style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 02: İkinci Beyin
+            </button>
+    
+            <button onclick="showAcadLesson(3)" id="acad-tab-3" class="btn " style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 03: Ürün Görselleri ve Reklamlar
+            </button>
+    
+            <button onclick="showAcadLesson(4)" id="acad-tab-4" class="btn " style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 04: Açık Kaynak Projeler ve Film Analizleri
+            </button>
+    
+            <button onclick="showAcadLesson(5)" id="acad-tab-5" class="btn " style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 05: Varlıkları Oluşturma ve Düzenleme
+            </button>
+    
+            <button onclick="showAcadLesson(6)" id="acad-tab-6" class="btn " style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 06: Çekim Ölçekleri ve Kamera Dili
+            </button>
+    
+            <button onclick="showAcadLesson(7)" id="acad-tab-7" class="btn " style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 07: Kendi Sahneni Yönet
+            </button>
+    
+            <button onclick="showAcadLesson(8)" id="acad-tab-8" class="btn " style="white-space:nowrap; font-size:0.8rem; padding:8px 12px;">
+                Ders 08: Kurs Saha Rehberi ve Sertifikasyon
+            </button>
+    
+        </div>
+    </div>
+
+    <!-- DİNAMİK DERS İÇERİK KARTI -->
+    <div id="acad_lesson_card" class="box" style="padding:26px;">
+        <!-- Javascript dinamik yükleyecek -->
+    </div>
+</div>
+        </div>
+        <div class="module" id="view-16">
+<h1>🎬 6 Katmanlı Resmi Yönetmen Prompt Konsolu (Seedance Prompter Standardı)</h1>
+                <p>Higgsfield Academy 7. Ders (Sayfa 10) resmi standardı olan <strong>6 Başlıklı Yönetmen
+                        Şablonuna</strong> göre tüm sinema departmanlarını (Mekân, Karakter, Kamera, Işık/Renk, Ses ve
+                    Kısıtlamalar) seçerek kusursuz sahne promptunuzu oluşturun:</p>
+
+                <div class="console-grid">
+                    <div class="field">
+                        <label>01 / SAHNE BAĞLAMI & MEKÂN (@loc)</label>
+                        <select id="c_loc" onchange="generateMasterPrompt()">
+                            <option
+                                value="Inside @studio_v1, a modern broadcast studio with a presentation desk and large curved LED wall|Modern yayın stüdyosu (@studio_v1) içinde sunum masası ve dev kavisli LED ekran">
+                                Yayın Stüdyosu (@studio_v1)</option>
+                            <option
+                                value="Inside a sunlit modern architectural cafe with glass walls and wooden tables|Cam duvarlı ve ahşap masalı güneşli modern bir kafe">
+                                Modern Kafe İç Mekânı</option>
+                            <option
+                                value="Inside an executive corporate HR office with glass partitions|Cam bölmeli kurumsal bir İK ofisi">
+                                Kurumsal Ofis / Toplantı Odası</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>02 / OYUNCU, KOSTÜM & REFERANS (@char)</label>
+                        <select id="c_char" onchange="generateMasterPrompt()">
+                            <option
+                                value="@sienna_v1 (30yo female lead in crisp white button-down blouse and black skirt, natural studio make-up)|Beyaz gömlekli ve siyah etekli, doğal stüdyo makyajlı @sienna_v1">
+                                @sienna_v1 (Sunucu / AI Lead)</option>
+                            <option
+                                value="@mark_v1 (35yo male HR executive in tailored charcoal blazer, clean grooming)|Antrasit ceketli İK yöneticisi @mark_v1">
+                                @mark_v1 (İK Yöneticisi)</option>
+                            <option
+                                value="@ege_v1 (28yo male engineer in smart-casual knit sweater)|Akıllı-gündelik kazaklı mühendis @ege_v1">
+                                @ege_v1 (Mühendis / Kullanıcı)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>03 / ÇEKİM ÖLÇEĞİ & HAREKET (SHOTS)</label>
+                        <select id="c_shot" onchange="generateMasterPrompt()">
+                            <option
+                                value="[00:00-00:05] Full-body wide shot, then smooth dolly push-in to a medium close-up|[00:00-00:05] Boydan geniş planla başlar, akıcı bir şekilde göğüs üstü yakın plana yaklaşır">
+                                Boydan Başla -> Yakın Plana İlerleme (Push-In)</option>
+                            <option
+                                value="[00:00-00:07] Eye-level medium shot at the desk, then [00:07-00:15] smooth pan and push-in to frame only the background projection screen|[00:00-00:07] Masada orta plan, ardından [00:07-00:15] kayarak sadece arkadaki projeksiyon ekranını çerçeveleme">
+                                Oyuncudan -> Projeksiyon Ekranına Geçiş (Multi-Shot)</option>
+                            <option
+                                value="[00:00-00:10] Over-the-shoulder shot looking down at the screen with subtle rack focus|[00:00-00:10] Omuz üstü açıdan ekrana bakış ve odak değişimi">
+                                Omuz Üstü Ekran Odaklı Çekim (OTS)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>04 / KAMERA YASASI & LENS (CAMERA LAW)</label>
+                        <select id="c_law" onchange="generateMasterPrompt()">
+                            <option
+                                value="Shot on 50mm prime lens f/1.8, eye-level camera height, stabilized fluid head movement, natural motion blur, 16:9 aspect ratio|50mm f/1.8 lens, göz hizası yüksekliği, sarsıntısız akıcı kamera başlığı, 16:9 oran">
+                                50mm Prime Lens + Göz Hizası (16:9 Yatay)</option>
+                            <option
+                                value="Shot on 24mm wide cinema lens, chest-level height, locked-off tripod stability, deep focus, 16:9 aspect ratio|24mm geniş sinema lensi, göğüs hizası, sabit tripod, derin odak, 16:9 oran">
+                                24mm Geniş Sinema Lensi + Derin Odak (16:9)</option>
+                            <option
+                                value="Shot on 85mm portrait lens f/1.4, shallow depth of field with creamy bokeh, vertical 9:16 aspect ratio|85mm portre lensi, arka planı bulanıklaştıran sığ alan derinliği, 9:16 dikey oran">
+                                85mm Portre Lensi + Bokeh (9:16 Dikey)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>05 / REJİ DUYGUSU & OYUNCULUK (MOOD)</label>
+                        <select id="c_mood" onchange="generateMasterPrompt()">
+                            <option
+                                value="Confident, warm, and authoritative broadcast delivery with natural hand gestures|Doğal el jestleriyle desteklenen, güven veren ve sıcak sunum oyunculuğu">
+                                Güven Veren & Profesyonel (B2B / Sunum)</option>
+                            <option
+                                value="Lighthearted comedic timing, witty expressive facial reaction and playful grin|Hafif mizahi zamanlama, zeki ve ifadeli yüz mimikleri">
+                                Mizahi / Komedi / İronik (B2C)</option>
+                            <option
+                                value="Dramatic emotional realization, subtle micro-expressions transitioning from fatigue to relief|Yorgunluktan rahatlamaya geçen ince dramatik mikro mimikler">
+                                Dramatik & Duygusal Empati</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>06 / IŞIK, RENK & SES (GRADE & AUDIO)</label>
+                        <select id="c_grade" onchange="generateMasterPrompt()">
+                            <option
+                                value="Soft three-point studio lighting with rim light, interactive laptop screen glow on face, clean corporate blue and warm skin color grade. Clear studio voice recording with subtle room tone|Üç noktalı stüdyo ışığı, yüze yansıyan ekran parlaması, kurumsal mavi ve sıcak ten rengi dengesi, temiz stüdyo sesi">
+                                Stüdyo Işığı + Ekran Yansıması + Temiz Akustik</option>
+                            <option
+                                value="Natural golden hour sunlight through windows, warm cinematic teal-and-orange grade, soft ambient room murmur and crisp mouse click SFX|Doğal gün batımı pencere ışığı, sıcak sinematik renkler, hafif ortam sesi ve net fare tıklama efekti">
+                                Doğal Gün Işığı + Sinematik Renk + Ortam Sesi</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field" style="margin-top:12px;">
+                    <label>DİYALOG / EYLEM METNİ (İngilizce Konuşma Repliği)</label>
+                    <input type="text" id="c_dialogue"
+                        value="I would like to show you how the recruitment process module works for companies."
+                        oninput="generateMasterPrompt()">
+                </div>
+
+                <div class="code-panel" style="margin-top:18px;">
+                    <button class="copy-trigger" onclick="copyBox(this)">Promptu Kopyala</button>
+                    <div class="en-text" id="master_en" style="white-space: pre-line;"></div>
+                    <div class="tr-text" id="master_tr"></div>
+                </div>
+        </div>
+        <div class="module" id="view-17">
+<h1>🎛️ İnteraktif Cinema Studio 4.0 & Seedance 2.5 Ayar ve Prompt Simülatörü</h1>
+                <p>Aşağıdaki konsoldan önce <strong>Higgsfield arayüzünde hangi menü ayarlarını seçeceğinizi</strong>
+                    belirleyin, sistem size hem <strong>arayüzde tıklayacağınız menü reçetesini</strong> hem de
+                    <strong>6 katmanlı İngilizce/Türkçe promptu</strong> otomatik üretsin:</p>
+
+                <div class="ui-sim">
+                    <div class="ui-sim-header">1. ADIM: HIGGSFIELD ARAYÜZ MENÜ AYARLARINI SEÇİN</div>
+                    <div class="control-grid">
+                        <div class="ctrl-item">
+                            <label>MODEL & ÇÖZÜNÜRLÜK (Alt Çubuk)</label>
+                            <select id="s_model" onchange="runSim()">
+                                <option value="Cinema Studio 4.0 | 480p Draft (Test) -> 1080p Final">Cinema Studio 4.0
+                                    (480p Test -> 1080p)</option>
+                                <option value="Seedance 2.5 | 480p Draft -> 1080p Final">Seedance 2.5 (480p Test ->
+                                    1080p)</option>
+                                <option value="Seedance 2.0 4K | Native 4K | Bitrate: High">Seedance 2.0 (Native 4K +
+                                    High Bitrate)</option>
+                                <option value="Minimax Hailuo | 1080p | Motion Strength: Low-Medium">Minimax Hailuo
+                                    (Vibe Motion UI Modu)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>ORAN, SÜRE & SES (Alt Çubuk)</label>
+                            <select id="s_time" onchange="runSim()">
+                                <option value="Ratio: 16:9 | Duration: 15s | Audio: ON | Output: 1/4">16:9 Yatay | 15
+                                    Saniye | Ses: AÇIK | 1/4</option>
+                                <option value="Ratio: 9:16 | Duration: 12s | Audio: ON | Output: 1/4">9:16 Dikey | 12
+                                    Saniye | Ses: AÇIK | 1/4</option>
+                                <option value="Ratio: 21:9 | Duration: 20s | Audio: ON | Output: 1/4">21:9 Sinema | 20
+                                    Saniye | Ses: AÇIK | 1/4</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>FILM SETUP: TÜR, DÖNEM & TEMPO</label>
+                            <select id="s_film" onchange="runSim()">
+                                <option
+                                    value="Genre: Corporate/Commercial | Era: 2020s | Tempo: Moderate|Kurumsal Reklam, 2020'ler Modern, Dengeli Tempo">
+                                    Commercial/Corporate | 2020s | Moderate</option>
+                                <option
+                                    value="Genre: Drama | Era: 2020s | Tempo: Calm|Dram Türü, 2020'ler, Sakin Tempo">
+                                    Drama | 2020s | Calm (Sakin Dram)</option>
+                                <option
+                                    value="Genre: Comedy | Era: 2020s | Tempo: Dynamic|Komedi Türü, 2020'ler, Dinamik Tempo">
+                                    Comedy | 2020s | Dynamic (Komedi)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>EMOTION WHEEL (Duygu Çarkı Seçimi)</label>
+                            <select id="s_emo" onchange="runSim()">
+                                <option
+                                    value="Emotion Wheel: Joy -> Serenity (Warm confident smile)|Duygu Çarkı: Joy (En alt kademe: Serenity - Huzurlu ve güven veren tebessüm)">
+                                    Joy ➔ Serenity (Huzurlu/Güvenli Gülümseme)</option>
+                                <option
+                                    value="Emotion Wheel: Neutral (Calm authoritative focus)|Duygu Çarkı: Neutral (Sakin ve otoriter odaklanma)">
+                                    Neutral (Ciddi / Kurumsal Odak)</option>
+                                <option
+                                    value="Emotion Wheel: Joy -> High (Enthusiastic & Playful)|Duygu Çarkı: Yüksek Neşe ve Enerji">
+                                    Joy ➔ High (Enerjik / Mizahi Coşku)</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>CAMERA & LENS MENÜSÜ</label>
+                            <select id="s_cam" onchange="runSim()">
+                                <option
+                                    value="Body: Modern | Lens: Clean 50mm Prime | Aperture: Moderate|Modern Gövde, 50mm Lens, Dengeli Diyafram">
+                                    Modern Gövde | 50mm Lens | Moderate Diyafram</option>
+                                <option
+                                    value="Body: Modern | Lens: Warm Vintage 35mm | Aperture: Shallow (Bokeh)|Modern Gövde, Sıcak Vintage Lens, Sığ Diyafram (Bokeh)">
+                                    Modern Gövde | Warm Vintage Lens | Shallow</option>
+                                <option
+                                    value="Body: Modern | Lens: 24mm Wide | Aperture: Deep Focus|Modern Gövde, 24mm Geniş Lens, Derin Odak">
+                                    Modern Gövde | 24mm Geniş | Deep Focus</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-item">
+                            <label>COLORS (Renk Paleti Menüsü)</label>
+                            <select id="s_col" onchange="runSim()">
+                                <option
+                                    value="Palette: Broadcast Blue & Warm Skin Tones|Kurumsal Mavi ve Sıcak Ten Tonu Paleti">
+                                    Broadcast Blue & Warm Skin (Stüdyo)</option>
+                                <option
+                                    value="Palette: Harvest Hour (Warm Brown & Gold)|Harvest Hour (Sıcak Kahve ve Altın Paleti)">
+                                    Harvest Hour (Sıcak Kahve & Altın)</option>
+                                <option
+                                    value="Palette: Violet Hour (Indigo, Violet & Warm Apricot)|Violet Hour (İndigo, Mor ve Sıcak Kayısı Paleti)">
+                                    Violet Hour (İndigo & Sıcak Kayısı)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-grid" style="margin-top:12px;">
+                        <div class="ctrl-item">
+                            <label>KARAKTER & MEKÂN (@Elements)</label>
+                            <input type="text" id="s_ref" value="@sienna_v1 inside @studio_v1" oninput="runSim()">
+                        </div>
+                        <div class="ctrl-item">
+                            <label>KAMERA HAREKETİ (Preset veya Zamanlı Komut)</label>
+                            <input type="text" id="s_move"
+                                value="[00:00-00:07] Eye-level medium shot at desk, [00:07-00:15] smooth pan and push-in to frame the background screen"
+                                oninput="runSim()">
+                        </div>
+                        <div class="ctrl-item">
+                            <label>DİYALOG METNİ (İngilizce)</label>
+                            <input type="text" id="s_dlg"
+                                value="I would like to show you how the recruitment process module works for companies."
+                                oninput="runSim()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-box" id="ui_recipe" style="border-left-color: var(--amber);"></div>
+
+                <div class="prompt-card">
+                    <button class="copy-btn" onclick="copyPrompt(this)">Promptu Kopyala</button>
+                    <div class="p-en" id="sim_en"></div>
+                    <div class="p-tr" id="sim_tr"></div>
+                </div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+            <button class="btn" id="prevBtn" onclick="stepNav(-1)">← Önceki Konu</button>
+            <span id="navCounter" style="font-size:0.8rem; color:var(--text-dim); font-family:monospace;">1 / 18</span>
+            <button class="btn btn-lime" id="nextBtn" onclick="stepNav(1)">Sonraki Konu →</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT MOTORU -->
+    <script>
+        const academyLessonsData = [
+  {
+    "id": 1,
+    "title": "İlk Videonuz (Your First Video)",
+    "subtitle": "Sahne Tarifi, Tembel vs Yapılandırılmış İstem ve SuperComputer",
+    "time": "45 Dk",
+    "pdfName": "Your First Video — Visual Companion.pdf (17 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy/courses/ai-creation/introduction",
+    "videoYouTube": "https://www.youtube.com/watch?v=IAswRvWjdD8",
+    "videoTitle": "AI Videos Look Bad? Here's Why & First Video Guide",
+    "extraLink": "https://higgsfield.ai/supercomputer-intro",
+    "extraTitle": "Higgsfield Supercomputer Tanıtımı",
+    "summary": "Bu dersin temel amacı; bir sahneyi doğru tarif etmeyi öğrenmek, 'tembel istem' (lazy prompt) ile 'yapılandırılmış istem' (structured prompt) arasındaki farkı görmek ve SuperComputer ile Preset araçlarını kullanarak ilk kısa videolarınızı üretmektir.",
+    "glossary": [
+      {
+        "term": "Model (Yapay Zekâ Motoru)",
+        "desc": "Girdilerinizi görsele veya videoya dönüştüren sistemdir. Görsel: Nano Banana, Seedream, Soul Cinema. Video: Kling, Seedance 2.5."
+      },
+      {
+        "term": "Prompt (İstem / Komut)",
+        "desc": "Görsel veya video için yazdığınız talimattır. 'Lazy prompt' sahneyi şansa bırakırken, 'Structured prompt' her detayı kontrol eder."
+      },
+      {
+        "term": "SuperComputer",
+        "desc": "Higgsfield'ın büyük dil modellerini (LLM) görsel/video üretim motorlarıyla birleştiren yapay zekâ ajanıdır."
+      },
+      {
+        "term": "Preset (Hazır Şablon)",
+        "desc": "Kamera hareketi, ışık ve sesin önceden tasarlandığı hazır sahne şablonudur (Earth Zoom, Orbit 360 vb.)."
+      },
+      {
+        "term": "Aspect Ratio (En-Boy Oranı)",
+        "desc": "Kadrajın şeklidir (21:9 sinemaskop, 16:9 standart yatay, 9:16 dikey mobil)."
+      },
+      {
+        "term": "Resolution (Çözünürlük)",
+        "desc": "Kadrajdaki piksel miktarıdır (480p taslak, 720p, 1080p final)."
+      },
+      {
+        "term": "Credits (Krediler)",
+        "desc": "Her üretim için harcanan birimdir. Üretim tamamlandığında sonucu beğenmeseniz bile kredi harcanmış olur."
+      },
+      {
+        "term": "Failed / NSFW",
+        "desc": "Teknik hata veya içerik güvenliği engeline takılan üretimlerde krediler otomatik iade edilir."
+      }
+    ],
+    "formula": {
+      "title": "5 Adımlı Prompt Yapılandırma Formülü (Focused Constraints)",
+      "steps": [
+        {
+          "step": "Subject (Özne)",
+          "desc": "Ana kişiyi veya nesneyi ve önemli görsel özelliklerini tanımlayın."
+        },
+        {
+          "step": "Location (Mekân)",
+          "desc": "Yeri, çevreyi ve günün hangi saati olduğunu açıklayın."
+        },
+        {
+          "step": "Events (Olaylar/Aksiyon)",
+          "desc": "Sahnenin nasıl bittiği dahil tüm hareketleri sırasıyla yazın."
+        },
+        {
+          "step": "Camera (Kamera)",
+          "desc": "Kadrajda neyin kalacağını, bakış açısını ve kamera hareketini belirtin."
+        },
+        {
+          "step": "Light + Sound (Işık ve Ses)",
+          "desc": "Işık kaynağını, yönünü ve duyulmasını istediğiniz sesleri yazın."
+        }
+      ]
+    },
+    "supercomputer_workflow": [
+      {
+        "step": "1. Taslak İste (Kredi Harcatmama)",
+        "text": "I want a video of a cyclist in a yellow jacket arriving at a cafe. Describe the scene in plain language first. Do not generate a video yet.",
+        "tr": "Sarı ceketli bir bisikletlinin kafeye varış videosunu istiyorum. Önce sahneyi sade dille tarif et. Henüz video üretme."
+      },
+      {
+        "step": "2. Tartış ve İyileştir",
+        "text": "Make the street quiet and set the scene at sunrise. Follow the cyclist from the side and end when she stops outside the cafe. Show me the revised prompt before generating.",
+        "tr": "Sokağı sakin yap, gün doğumuna ayarla. Bisikletliyi yandan takip et, kafenin önünde durduğunda bitir. Üretmeden önce revize edilmiş promptu bana göster."
+      },
+      {
+        "step": "3. Onayla ve Üret",
+        "text": "That is the scene I want. Use this approved prompt and the agreed settings to generate one video.",
+        "tr": "İstediğim sahne bu. Onaylanmış bu promptu ve kararlaştırılan ayarları kullanarak bir video üret."
+      }
+    ],
+    "sample_prompt": "Cinematic establishing shot of @sienna_v1 arriving at @studio_v1 at sunrise. The camera smoothly tracks her movement from the side and gently pushes in as she pauses by the modern glass door. Soft natural morning light, subtle city hum, photorealistic, 8K --ar 16:9",
+    "sample_prompt_tr": "@sienna_v1 karakterinin gün doğumunda @studio_v1 stüdyosuna varışının sinematik açılış çekimi. Kamera onun hareketini yandan akıcı bir şekilde takip eder ve modern cam kapının yanında duraksadığında hafifçe öne yaklaşır (push-in). Yumuşak sabah ışığı, 8K.",
+    "settings": "Model: Seedance 2.5 | Res: 480p (Taslak) | Duration: 5s | Aspect Ratio: 16:9",
+    "homework": "3 Video üretimi: 1. Basit (lazy) prompt, 2. SuperComputer ile 3 adımlı diyalogla geliştirilmiş prompt, 3. Preset şablonuna karakter yükleyerek üretim."
+  },
+  {
+    "id": 2,
+    "title": "İkinci Beyin (Second Brain)",
+    "subtitle": "AI Asistan ile Brief Geliştirme, Araştırma Bağlamı ve Prompt Revizyonu",
+    "time": "60 Dk",
+    "pdfName": "Second Brain — Visual Companion.pdf (18 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy",
+    "videoYouTube": "https://www.youtube.com/watch?v=NuvA32_dmtg",
+    "videoTitle": "A Full Production Through an AI Assistant / Second Brain",
+    "extraLink": "https://higgsfield.ai/creator-hub/help-center/integrations/how-do-i-connect-higgsfield-to-ai-agent",
+    "extraTitle": "Higgsfield AI Asistan Bağlantı Rehberi",
+    "summary": "Higgsfield içindeki SuperComputer'ı (dil modelini) bir 'İkinci Beyin' gibi kullanarak araştırma/içerik geliştirme ve sahneyi doğru brief ile şekillendirme sanatı.",
+    "glossary": [
+      {
+        "term": "Context (Bağlam)",
+        "desc": "Asistanın bilmesi gereken çerçeve: Siz kimsiniz, neye ihtiyacınız var ve çıktıyı hangi formatta istiyorsunuz."
+      },
+      {
+        "term": "Ask Mode (Üretmeden Önce Sor)",
+        "desc": "Asistanın doğrudan kredi harcayarak video üretmesini engelleyen ve onay isteyen hayati ayar."
+      },
+      {
+        "term": "Briefing (Görev Verme)",
+        "desc": "Asistana net bir rol, hedef kitle ve sınırlamalar tanımlama süreci."
+      },
+      {
+        "term": "Prompt Revision (Revizyon)",
+        "desc": "İlk taslak çıktı üzerinden hatalı unsurları tek tek ayıklayıp istemi zenginleştirme."
+      }
+    ],
+    "formula": {
+      "title": "Faydalı Bir Brief Verme Mimarisi",
+      "steps": [
+        {
+          "step": "1. Rol Tanımla",
+          "desc": "Örn: 'Act as a senior B2B recruitment video director...'"
+        },
+        {
+          "step": "2. Görevi Sınırla",
+          "desc": "Örn: 'Outline a 15-second ATS product teaser scene with 3 sequential shots...'"
+        },
+        {
+          "step": "3. Kısıtlamaları Belirt",
+          "desc": "Örn: 'Do not generate video yet. Give plain text shot descriptions first.'"
+        }
+      ]
+    },
+    "supercomputer_workflow": [
+      {
+        "step": "Senaryo Briefi Verme",
+        "text": "Act as a corporate video director for Lobox. We need a 15-second product teaser introducing our AI candidate matching dashboard. Give me 3 shots with camera instructions. Do not generate a video yet.",
+        "tr": "Lobox için kurumsal video yönetmeni gibi davran. Aday eşleştirme panelimizi tanıtan 15 saniyelik 3 planlık bir sahne kurgula. Henüz video üretme."
+      }
+    ],
+    "sample_prompt": "Professional corporate scenario for Lobox ATS dashboard: Shot 1: Wide view of modern tech studio. Shot 2: Push-in to recruiter smiling at laptop screen. Shot 3: Close-up on the clean candidate matching score on UI.",
+    "sample_prompt_tr": "Lobox ATS paneli kurumsal senaryosu: 1. Plan: Modern teknoloji stüdyosunun geniş çekimi. 2. Plan: Ekrana gülümseyen İK yöneticisine yaklaşma. 3. Plan: Arayüzdeki aday eşleşme puanına yakın plan.",
+    "settings": "Model: LLM Assistant / Chat Context Window | Ask before generating: AÇIK",
+    "homework": "SuperComputer ile konuşarak savas_lobox projesi için 3 farklı sahne taslağı hazırlayıp onaylanan metni arşive kaydetmek."
+  },
+  {
+    "id": 3,
+    "title": "Ürün Görselleri ve Reklamlar (Product Images and Ads)",
+    "subtitle": "UGC Reklamları, 3 Kampanya Görseli + 1 Video İş Akışı",
+    "time": "60 Dk",
+    "pdfName": "Product Images and Ads — Visual Companion.pdf (17 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy",
+    "videoYouTube": "https://www.youtube.com/watch?v=3rDs6FhFoUQ",
+    "videoTitle": "Three-Step AI Advertising Workflow (Official Tutorial)",
+    "extraLink": "https://higgsfield.ai/marketing-studio",
+    "extraTitle": "Higgsfield Marketing Studio",
+    "summary": "Tek bir orijinal ürün veya arayüz fotoğrafını referans alarak tutarlı bir mekânda 3 adet kampanya görseli ve 1 adet dinamik e-ticaret/UGC reklam videosu üretme.",
+    "glossary": [
+      {
+        "term": "Product Reference",
+        "desc": "Arka planı izole edilmiş temiz ürün görseli."
+      },
+      {
+        "term": "Campaign Photos (3 Görsel)",
+        "desc": "Farklı açılardan (geniş, detay, kullanım anı) aynı ürünün tutarlı fotoğrafları."
+      },
+      {
+        "term": "Seedream 5.0 Pro",
+        "desc": "Ürün çekimlerinde yansıma ve malzeme dokusunu en net koruyan görsel motoru."
+      },
+      {
+        "term": "Seedance 2.5 Edit",
+        "desc": "Mevcut video içindeki bir nesneyi yenisiyle değiştiren bölgesel düzenleme motoru."
+      }
+    ],
+    "formula": {
+      "title": "E-Ticaret ve UGC Reklam Standartı",
+      "steps": [
+        {
+          "step": "1. Referans Yükle",
+          "desc": "Ürünün temiz stüdyo fotoğrafını veya ekran görüntüsünü yükleyin."
+        },
+        {
+          "step": "2. 3 Kampanya Görseli Üret",
+          "desc": "Soul Cinema veya Seedream ile 3 farklı stüdyo kompozisyonu alın."
+        },
+        {
+          "step": "3. Dinamik Video Çıkar",
+          "desc": "Seedance 2.5 ile ürünü 360 derece döndüren (Orbit) veya kameranın yaklaştığı 5 saniyelik video üretin."
+        }
+      ]
+    },
+    "sample_prompt": "Commercial product showcase of Lobox career dashboard displayed on a sleek glass tablet, placed on a modern oak desk in @studio_v1. The camera executes a smooth 360 orbit around the device. Studio lighting, reflections, 8K.",
+    "sample_prompt_tr": "@studio_v1 içindeki meşe masada duran zarif cam tablete yansıtılmış Lobox kariyer paneli. Kamera tabletin etrafında akıcı bir 360 çember (orbit) çizer. Stüdyo aydınlatması, 8K.",
+    "settings": "Model: Seedream 5.0 Pro (Görsel) ➔ Seedance 2.5 (Video) | 480p Taslak | 5s",
+    "homework": "Lobox logosu veya arayüz görseli ile 1 adet ürün kampanya fotoğrafı ve 1 adet orbit hareketli video üretmek."
+  },
+  {
+    "id": 4,
+    "title": "Açık Kaynak Projeler ve Film Analizleri (Complete Projects)",
+    "subtitle": "Cully Hill Boys, Passport Rush ve Hell Grind Film İncelemeleri",
+    "time": "45 Dk",
+    "pdfName": "Course Field Guide & Project Library (27 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy",
+    "videoYouTube": "https://www.youtube.com/watch?v=tW40b122Rbs",
+    "videoTitle": "The Complete AI Short Film Workflow (Official Studio Breakdown)",
+    "extraLink": "https://higgsfield.ai/@higgsfield.studio/projects/cully-hill-boys",
+    "extraTitle": "Cully Hill Boys Resmi Açık Kaynak Projesi",
+    "summary": "Resmi açık kaynak film projelerini inceleyerek ham kaynak varlıklar (assets) ile nihai render sahneleri arasındaki süreklilik, ışık eşleme ve kurgu matematiğini öğrenme.",
+    "glossary": [
+      {
+        "term": "Multi-Reference Mode",
+        "desc": "Birden fazla görseli (karakter + mekân + ışık referansı) aynı anda modele besleme."
+      },
+      {
+        "term": "Frame Rate Matching",
+        "desc": "Sahneler arası kesintiyi önlemek için 24fps veya 30fps sinematik standardını koruma."
+      },
+      {
+        "term": "Lighting Continuity",
+        "desc": "Önceki plandaki ışık yönünün sonraki planda tersine dönmesini engelleme kuralı."
+      }
+    ],
+    "formula": {
+      "title": "Sinematik Proje Çözümleme Adımları",
+      "steps": [
+        {
+          "step": "Varlık Analizi",
+          "desc": "Karakter ve mekân referanslarının nasıl etiketlendiğini inceleyin."
+        },
+        {
+          "step": "Zaman Kodu Eşleme",
+          "desc": "Kamera hareketlerinin saniyeye göre nasıl bölündüğünü görün."
+        },
+        {
+          "step": "Hata Ayıklama",
+          "desc": "Yapay zekâ bozulmalarının inpaint ile nasıl temizlendiğini öğrenin."
+        }
+      ]
+    },
+    "sample_prompt": "Cinematic multi-shot continuity: Shot 1 (0-3s): Wide shot of executive entering @studio_v1. Shot 2 (3-6s): Match-cut push in to medium shot as he sits by the desk, maintaining uniform soft warm key light.",
+    "sample_prompt_tr": "Sinematik çoklu çekim sürekliliği: 1. Plan (0-3s): @studio_v1'e giren yöneticinin geniş açısı. 2. Plan (3-6s): Masaya otururken devam eden eşleşmeli yaklaşma (push-in), aynı yumuşak ana ışığı koruyarak.",
+    "settings": "Model: Multi-Reference Studio Mode | Aspect Ratio: 16:9 | 24 FPS",
+    "homework": "Sahneler arası ışık sürekliliğini test eden 2 ardışık plan üretmek."
+  },
+  {
+    "id": 5,
+    "title": "Varlıkları Oluşturma ve Düzenleme (Create and Edit Assets)",
+    "subtitle": "Karakter Tutarlılığı, 3 Panelli Model Sheet ve @ Elements Mimarisi",
+    "time": "90 Dk",
+    "pdfName": "Create and Edit Assets — Visual Companion.pdf (31 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy",
+    "videoYouTube": "https://www.youtube.com/watch?v=BnYFwQEAJls",
+    "videoTitle": "Higgsfield Soul 2 - AI Character Continuity & Real Faces",
+    "extraLink": "https://higgsfield.ai/creator-hub/help-center/ai-models/how-do-i-use-soul-to-generate-images",
+    "extraTitle": "Resmi Soul ID Görsel Oluşturma Kılavuzu",
+    "summary": "Karakterlerin yüzünün videolarda bozulmasını (drift) önleyen hayati 3 panelli şablon kuralı: Sol panel kafasız/boş ön gövde, orta panel arka görünüm, sağ panel net yakın portre.",
+    "glossary": [
+      {
+        "term": "Character Drift (Yüz Bozulması)",
+        "desc": "Sahneler değiştikçe yapay zekânın karakterin yüz kemiklerini, yaşını ve saçını değiştirmesi hatası."
+      },
+      {
+        "term": "Headless Front View (Kafasız Ön Gövde)",
+        "desc": "Karakter kartının sol panelinde boydan bedenin yer alıp kafanın olmaması tekniği. Yapay zekânın çoklu yüz körlüğünü engeller."
+      },
+      {
+        "term": "@ Elements",
+        "desc": "Karakter ve mekânların sistem kütüphanesine kaydedilip @ etiketiyle çağrılması."
+      },
+      {
+        "term": "Environment Lock",
+        "desc": "İçinde insan olmayan boş mekân referansı üreterek arka planı sabitleme kuralı."
+      }
+    ],
+    "formula": {
+      "title": "3 Panelli Master Karakter Kartı Kuralı",
+      "steps": [
+        {
+          "step": "Sol Panel",
+          "desc": "Full-body headless front view (Boydan kafasız ön gövde ve kıyafet)."
+        },
+        {
+          "step": "Orta Panel",
+          "desc": "Full-body back view (Boydan arka görünüm ve saç)."
+        },
+        {
+          "step": "Sağ Panel",
+          "desc": "Close-up portrait (8K tek net yüz portresi)."
+        }
+      ]
+    },
+    "sample_prompt": "A three-panel character sheet for @sienna_v1. Left panel: full-body headless front view showing modern corporate navy blazer and trousers. Middle panel: back view. Right panel: close-up portrait of her face with confident warm smile. Neutral studio gray background, 8K --ar 16:9",
+    "sample_prompt_tr": "@sienna_v1 için 3 panelli karakter kartı. Sol panel: modern lacivert blazer ceketli kafasız ön gövde. Orta panel: arka görünüm. Sağ panel: güven veren tebessümlü yakın yüz portresi. Nötr stüdyo gri arka planı, 8K, 16:9.",
+    "settings": "Model: GPT Image 2.5 Sunburst | Aspect Ratio: 16:9 Yatay (Asla 9:16 yapmayın!)",
+    "homework": "Sienna veya Mark için 3 panelli kafasız gövde kuralına tam uyan 1 adet master model sheet üretip @elements sekmesine kaydetmek."
+  },
+  {
+    "id": 6,
+    "title": "Çekim Ölçekleri ve Kamera Dili (Shot Sizes and Prompting)",
+    "subtitle": "Kamera Ölçekleri (EWS-ECU), Açılar ve Hareket Komutları Ansiklopedisi",
+    "time": "60 Dk",
+    "pdfName": "Camera — Shot Sizes, Angles and Movement.pdf (20 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy",
+    "videoYouTube": "https://www.youtube.com/watch?v=jvkdHdeWICM&t=52s",
+    "videoTitle": "Seedance 2.5 Camera Tests & Movement Examples (Start 00:52)",
+    "extraLink": "https://higgsfield.ai/academy/apps/prompt-bank",
+    "extraTitle": "Higgsfield Resmi Kamera Prompt Bankası",
+    "summary": "Yapay zekâya rastgele komut vermek yerine profesyonel bir görüntü yönetmeni gibi konuşmayı öğrenme: EWS, WS, MS, CU ölçekleri; Low/High angle açıları ve Push-in/Orbit hareketleri.",
+    "glossary": [
+      {
+        "term": "EWS (Extreme Wide Shot)",
+        "desc": "Mekânı ve atmosferi kuran aşırı geniş açılı çekim."
+      },
+      {
+        "term": "MS (Medium Shot)",
+        "desc": "Karakterin belden yukarısı; diyalog ve sunumların standart kadrajı."
+      },
+      {
+        "term": "CU (Close-Up)",
+        "desc": "Yalnızca yüz ve omuzlar; duyguyu ve mimikleri aktarır."
+      },
+      {
+        "term": "Push-In",
+        "desc": "Kameranın akıcı bir şekilde öne, karaktere doğru yaklaşması."
+      },
+      {
+        "term": "Orbit",
+        "desc": "Karakterin veya nesnenin etrafında çember çizerek dönme."
+      }
+    ],
+    "formula": {
+      "title": "Kamerayı Kelimelere Dökme Sözlüğü (Put Camera into Words)",
+      "steps": [
+        {
+          "step": "Başlangıç Planı",
+          "desc": "Örn: 'The camera starts with a wide full-body view...'"
+        },
+        {
+          "step": "Hareket Fiili",
+          "desc": "Örn: '...then smoothly pushes in to a medium close-up...'"
+        },
+        {
+          "step": "Bitiş Kadrajı",
+          "desc": "Örn: '...and locks onto her face as she smiles.'"
+        }
+      ]
+    },
+    "sample_prompt": "@sienna_v1 standing in @studio_v1. The camera starts with a wide establishing view, then smoothly pushes in to a medium close-up shot as she smiles warmly and speaks to the lens: 'Hello, welcome to Lobox.' Photorealistic, 8K.",
+    "sample_prompt_tr": "@studio_v1 içinde duran @sienna_v1. Kamera geniş açıyla başlar, ardından sıcak bir şekilde gülümseyip konuşurken akıcı bir şekilde orta yakın plana (push-in) yaklaşır. 8K.",
+    "settings": "Model: Seedance 2.5 | Camera Preset: Push-In | 480p Taslak | 10s",
+    "homework": "Push-in ve Orbit hareketlerini içeren 2 farklı kamera açısı denemesi yapmak."
+  },
+  {
+    "id": 7,
+    "title": "Kendi Sahneni Yönet (Direct Your Own Scene)",
+    "subtitle": "Seedance 2.5 ile Çoklu Referans Sahneleme ve Multi-Shot Kurgusu",
+    "time": "90 Dk",
+    "pdfName": "Direct Your Own Scene.pdf (13 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy",
+    "videoYouTube": "https://www.youtube.com/watch?v=Hn8A8D4-SpQ&t=834s",
+    "videoTitle": "Build a Scene with Seedance 2.5 - Official Masterclass (Start 13:54)",
+    "extraLink": "https://higgsfield.ai/blog/seedance-2-5-prompting-guide",
+    "extraTitle": "Seedance 2.5 Resmi Prompt Rehberi",
+    "summary": "Birden fazla referansı (@karakter + @mekan) aynı anda yöneterek sahne aksiyonunu kademelendirme (staging action), arayüz prototiplerini dijital ekranlara yerleştirme ve süreklilik sağlama.",
+    "glossary": [
+      {
+        "term": "Staging Action",
+        "desc": "Aktörün sahneye girişini, masaya oturmasını ve ekrana bakmasını adım adım tarif etme."
+      },
+      {
+        "term": "Multi-Shot Continuity",
+        "desc": "Tek bir render içinde zaman kodlarıyla (0-5s, 5-10s) ardışık planları akıcı bağlama."
+      },
+      {
+        "term": "Diagnose & Refine",
+        "desc": "Yapay zekâ çıktısındaki el veya kamera hızı hatalarını teşhis edip promptu revize etme."
+      }
+    ],
+    "formula": {
+      "title": "Aksiyon Sahneleme Protokolü",
+      "steps": [
+        {
+          "step": "1. Konumlandır",
+          "desc": "Karakter nerede duruyor, neye bakıyor?"
+        },
+        {
+          "step": "2. Eylemi Başlat",
+          "desc": "Hangi nesneye dokunuyor, nereye yürüyor?"
+        },
+        {
+          "step": "3. Sonuca Bağla",
+          "desc": "Kameraya dönüp hangi mesajı veriyor?"
+        }
+      ]
+    },
+    "sample_prompt": "@sienna_v1 sits at the modern desk in @studio_v1. The background digital screen transitions to show the Lobox ATS dashboard. She gestures towards the screen and speaks directly to camera. Smooth camera push-in, 480p, 10s.",
+    "sample_prompt_tr": "@sienna_v1, @studio_v1 içindeki modern masada oturur. Arka plandaki dijital ekranda Lobox ATS paneli belirir. Ekrana doğru jest yapar ve doğrudan kameraya konuşur. Akıcı kamera yaklaşması, 10s.",
+    "settings": "Model: Seedance 2.5 | Multi-shot | 480p | 10s",
+    "homework": "Sienna'nın Lobox platformunu tanıttığı 10 saniyelik çoklu plan sahnesini yönetmek."
+  },
+  {
+    "id": 8,
+    "title": "Kurs Saha Rehberi ve Sertifikasyon (Course Field Guide)",
+    "subtitle": "Tüm Modülleri Birleştirme, Hikâye Yapısı ve Final Vitrini",
+    "time": "60 Dk",
+    "pdfName": "Course Field Guide.pdf (14 Sayfa)",
+    "videoAcademy": "https://higgsfield.ai/academy",
+    "videoYouTube": "https://www.youtube.com/@HiggsfieldAI",
+    "videoTitle": "Higgsfield Resmi YouTube Kanalı ve Tüm Film Galerisi",
+    "extraLink": "https://higgsfield.ai/creator-hub/changelog",
+    "extraTitle": "Higgsfield Creator Hub & Sürüm Notları",
+    "summary": "Eğitimin final adımı: Senaryo, karakter kartı, mekân kilitleme, kamera dili ve ses kurgusunu birleştirerek eksiksiz bir kurumsal vitrin videosu üretme ve sertifikasyon gereksinimlerini tamamlama.",
+    "glossary": [
+      {
+        "term": "Story Structure",
+        "desc": "Problem ➔ Çözüm ➔ Vitrin ➔ Harekete Geçirici Çağrı (CTA) kurumsal video akışı."
+      },
+      {
+        "term": "Final Polish",
+        "desc": "Renk derecelendirme (Color Grade), ses seviyeleri ve lipsync son doğrulaması."
+      },
+      {
+        "term": "Certification Checklist",
+        "desc": "Higgsfield Academy sertifikası için 8 dersin ödevlerinin sisteme işlenmesi."
+      }
+    ],
+    "formula": {
+      "title": "Kurumsal Video Üretim Kontrol Listesi",
+      "steps": [
+        {
+          "step": "Karakter Tutarlı mı?",
+          "desc": "3 panelli master kart referansı bağlı mı?"
+        },
+        {
+          "step": "Mekân Kilitli mi?",
+          "desc": "Arka plan boş mekân referansıyla tutarlı mı?"
+        },
+        {
+          "step": "Kredi Tasarrufu Yapıldı mı?",
+          "desc": "480p taslak onaylandıktan sonra mı 1080p final basıldı?"
+        },
+        {
+          "step": "Lipsync Kusursuz mu?",
+          "desc": "Ses tek konuşmacı veya DaVinci maskeleme kuralına uygun mu?"
+        }
+      ]
+    },
+    "sample_prompt": "Final complete presentation scene for Lobox B2B recruitment platform featuring @sienna_v1 in @studio_v1. Professional corporate lighting, clean sound sync, high-end commercial aesthetic, production ready, 8K.",
+    "sample_prompt_tr": "@studio_v1 içinde @sienna_v1'in sunduğu Lobox B2B platformunun final sunum sahnesi. Profesyonel kurumsal aydınlatma, temiz ses senkronu, üst düzey reklam estetiği, 8K.",
+    "settings": "Model: Seedance 2.5 / Cinema Studio | Production Ready 1080p | 15s",
+    "homework": "savas_lobox projesi için final vitrin videosunu üretip arşivlemek."
+  }
+];
+
+        let currentView = 0;
+        const totalViews = 18;
+
+        function go(index) {
+            if (index < 0 || index >= totalViews) return;
+            currentView = index;
+
+            // Modülleri güncelle
+            document.querySelectorAll('.module').forEach((m, idx) => {
+                m.classList.toggle('active', idx === index);
+            });
+
+            // Menüyü güncelle
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach((link, idx) => {
+                link.classList.toggle('active', idx === index);
+            });
+
+            // Başlığı güncelle
+            const activeLink = links[index];
+            if (activeLink) {
+                const titleText = activeLink.querySelector('.truncate').innerText;
+                document.getElementById('topTitle').innerText = titleText;
+            }
+
+            // Sayaç
+            document.getElementById('navCounter').innerText = (index + 1) + " / " + totalViews;
+            document.getElementById('prevBtn').disabled = (index === 0);
+            document.getElementById('nextBtn').disabled = (index === totalViews - 1);
+            document.getElementById('prevBtn').style.opacity = (index === 0) ? '0.4' : '1';
+            document.getElementById('nextBtn').style.opacity = (index === totalViews - 1) ? '0.4' : '1';
+
+            // Scroll başa al
+            document.getElementById('stageContainer').scrollTop = 0;
+
+            // Eğer Akademi açıldıysa ilk dersi render et
+            if (index === 15) {
+                showAcadLesson(1);
+            }
+            // Eğer Konsol açıldıysa
+            if (index === 16) {
+                generateMasterPrompt();
+            }
+            // Eğer Simülatör açıldıysa
+            if (index === 17) {
+                runSim();
+            }
+        }
+
+        function stepNav(dir) {
+            go(currentView + dir);
+        }
+
+        // Akademi Dersi Gösterici
+        function showAcadLesson(id) {
+            const l = academyLessonsData.find(item => item.id === id);
+            if (!l) return;
+
+            // Butonları güncelle
+            for (let i = 1; i <= 8; i++) {
+                const btn = document.getElementById('acad-tab-' + i);
+                if (btn) {
+                    if (i === id) {
+                        btn.className = 'btn btn-lime';
+                    } else {
+                        btn.className = 'btn';
+                    }
+                }
+            }
+
+            const container = document.getElementById('acad_lesson_card');
+
+            // Glosar HTML
+            let glossaryHtml = '';
+            if (l.glossary && l.glossary.length > 0) {
+                glossaryHtml = `
+                    <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:8px; padding:16px; margin:16px 0;">
+                        <span class="box-badge">📖 DERSİN TERİMLER SÖZLÜĞÜ (GLOSSARY)</span>
+                        <div class="grid-2" style="margin-top:10px;">
+                            ${l.glossary.map(g => `
+                                <div style="background:var(--bg-panel); border:1px solid var(--border); border-radius:6px; padding:10px;">
+                                    <strong style="color:var(--text); font-size:0.86rem; display:block; margin-bottom:2px;">${g.term}</strong>
+                                    <p style="margin:0; font-size:0.82rem; color:var(--text-dim);">${g.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Formül HTML
+            let formulaHtml = '';
+            if (l.formula) {
+                formulaHtml = `
+                    <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:8px; padding:16px; margin:16px 0;">
+                        <span class="box-badge" style="background:rgba(192,132,252,0.15); color:var(--accent-purple);">⚡ ${l.formula.title}</span>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-top:10px;">
+                            ${l.formula.steps.map(s => `
+                                <div style="background:var(--bg-panel); border:1px solid var(--border); border-radius:6px; padding:10px; text-align:center;">
+                                    <strong style="color:var(--accent-purple); font-size:0.82rem; display:block; margin-bottom:4px;">${s.step}</strong>
+                                    <p style="margin:0; font-size:0.78rem; color:var(--text-dim);">${s.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // SuperComputer Workflow HTML
+            let scHtml = '';
+            if (l.supercomputer_workflow) {
+                scHtml = `
+                    <div style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.25); border-radius:8px; padding:16px; margin:16px 0;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <span class="box-badge" style="background:rgba(56,189,248,0.2); color:var(--accent-blue);">🤖 SUPERCOMPUTER İLE KREDİ HARCAMADAN SAHNE GELİŞTİRME</span>
+                            <span style="font-size:0.75rem; color:var(--accent-blue); font-family:monospace;">3 Aşamalı Diyalog</span>
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            ${l.supercomputer_workflow.map(w => `
+                                <div style="background:var(--bg-panel); border:1px solid var(--border); border-radius:6px; padding:10px;">
+                                    <strong style="color:var(--accent-blue); font-size:0.82rem; display:block; margin-bottom:3px;">${w.step}</strong>
+                                    <div style="font-family:monospace; font-size:0.82rem; color:#86efac; margin-bottom:4px; user-select:all;">${w.text}</div>
+                                    <div style="font-size:0.8rem; color:var(--text-dim); font-style:italic;">Türkçesi: ${w.tr}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:12px; border-bottom:1px solid var(--border); padding-bottom:16px; margin-bottom:18px;">
+                    <div>
+                        <span class="box-badge" style="background:rgba(163,230,53,0.15); color:var(--accent); font-weight:bold;">DERS 0${l.id} / 08 • ${l.time}</span>
+                        <h2 style="font-size:1.45rem; color:var(--text); margin:6px 0 2px; border:none; padding:0;">${l.title}</h2>
+                        <div style="color:var(--accent-blue); font-size:0.9rem; font-weight:500;">${l.subtitle}</div>
+                    </div>
+
+                    <!-- RESMİ VİDEO VE KAYNAK BUTONLARI -->
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <a href="${l.videoYouTube}" target="_blank" class="btn btn-red" style="font-size:0.8rem; padding:8px 14px;">
+                            ▶️ Resmi YouTube Eğitim Videosunu İzle
+                        </a>
+                        <a href="${l.videoAcademy}" target="_blank" class="btn" style="font-size:0.78rem; padding:6px 12px; border-color:var(--accent); color:var(--accent);">
+                            🌐 Higgsfield Academy Resmi Ders Sayfası
+                        </a>
+                        ${l.extraLink ? `
+                            <a href="${l.extraLink}" target="_blank" class="btn" style="font-size:0.75rem; padding:5px 10px; color:var(--text-dim);">
+                                🔗 ${l.extraTitle}
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+
+                <!-- DERS ÖZETİ VE PDF BİLGİSİ -->
+                <div style="background:var(--bg-main); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <strong style="font-size:0.86rem; color:var(--accent);">📖 Ders Özeti ve Kazanımları</strong>
+                        <span style="font-size:0.75rem; font-family:monospace; color:var(--accent-blue); background:#0f172a; padding:3px 8px; border-radius:4px; border:1px solid var(--border);">📄 ${l.pdfName}</span>
+                    </div>
+                    <p style="margin:0; font-size:0.88rem; color:var(--text-dim); line-height:1.6;">${l.summary}</p>
+                </div>
+
+                ${glossaryHtml}
+                ${formulaHtml}
+                ${scHtml}
+
+                <!-- ONAYLI ÖRNEK PROMPT KARTI -->
+                <div class="code-panel">
+                    <button class="copy-trigger" onclick="copySnippet('acad_prompt_${l.id}')">📋 Kopyala</button>
+                    <span class="box-badge" style="background:rgba(163,230,53,0.15); color:var(--accent);">💡 ONAYLI UYGULAMA PROMPTU (SAVAS_LOBOX)</span>
+                    <div id="acad_prompt_${l.id}" class="en-text" style="margin-top:6px;">${l.sample_prompt}</div>
+                    <div class="tr-text">Türkçe Anlamı: ${l.sample_prompt_tr}</div>
+                    <div style="margin-top:10px; padding-top:8px; border-top:1px solid var(--border); font-size:0.8rem; color:var(--accent-purple); font-family:monospace;">
+                        ⚙️ Tavsiye Edilen Ayar: ${l.settings}
+                    </div>
+                </div>
+
+                <!-- DERS ÖDEVİ -->
+                <div style="background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.3); border-radius:8px; padding:14px; margin-top:16px; display:flex; gap:12px; align-items:center;">
+                    <span style="font-size:1.4rem;">🛠️</span>
+                    <div>
+                        <strong style="color:var(--accent-amber); font-size:0.85rem; display:block;">Dersin Uygulama Pratiği (Homework):</strong>
+                        <span style="color:var(--text-light); font-size:0.82rem;">${l.homework}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Arama ve Filtreleme
+        function filterNav(q) {
+            const val = q.trim().toLowerCase();
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(l => {
+                const txt = l.innerText.toLowerCase();
+                if (txt.includes(val)) {
+                    l.style.display = 'flex';
+                } else {
+                    l.style.display = 'none';
+                }
+            });
+        }
+
+        // Kopyalama ve Toast
+        function copySnippet(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText || el.textContent;
+            navigator.clipboard.writeText(text.trim()).then(() => {
+                showToast("✓ Panoya Kopyalandı!");
+            });
+        }
+
+        function copyPrompt(btn) {
+            const box = btn.parentElement;
+            const enText = box.querySelector('.en-text') || box.querySelector('.p-en') || box;
+            navigator.clipboard.writeText(enText.innerText.trim()).then(() => {
+                showToast("✓ Panoya Kopyalandı!");
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // 6 Katmanlı Yönetmen Prompt Konsolu Fonksiyonu
+        function generateMasterPrompt() {
+            const c_char = document.getElementById('c_char');
+            if (!c_char) return;
+
+            const char = c_char.value;
+            const loc = document.getElementById('c_loc').value;
+            const shot = document.getElementById('c_shot').value;
+            const law = document.getElementById('c_law').value;
+            const mood = document.getElementById('c_mood').value;
+            const dialogue = document.getElementById('c_dialogue').value;
+            const grade = document.getElementById('c_grade').value;
+
+            const en = `01 / SCENE CONTEXT: Cinematic film scene featuring ${char} inside ${loc}.\n` +
+                       `02 / REFERENCES: Consistent ${char} biometric details, exact ${loc} spatial layout and architectural geometry.\n` +
+                       `03 / SHOTS & TIMELINE: ${shot}, character maintains authentic ${mood} performance, speaking naturally: "${dialogue}"\n` +
+                       `04 / CAMERA LAW: ${law}.\n` +
+                       `05 / GRADE AND AUDIO: ${grade}, balanced key and fill lighting with natural falloff, clear broadcast-quality dialogue recording.\n` +
+                       `06 / CONSTRAINTS: Absolute face and character continuity, sharp UI text fidelity, photorealistic physical motion, no morphing artifacts, 8K resolution.`;
+
+            const tr = `TÜRKÇE YÖNETMEN NOTU: ${loc} mekânındaki ${char} sahnesi. ${shot} ölçeğinde, ${law} kamera disipliniyle çekilir. Karakter ${mood} tonlamasıyla "${dialogue}" der. Işık ${grade} standardındadır.`;
+
+            const masterEn = document.getElementById('master_en');
+            const masterTr = document.getElementById('master_tr');
+            if (masterEn) masterEn.innerText = en;
+            if (masterTr) masterTr.innerText = tr;
+        }
+
+        // Cinema Studio Simülatörü Fonksiyonu
+        function runSim() {
+            const s_model = document.getElementById('s_model');
+            if (!s_model) return;
+
+            const model = s_model.value;
+            const time = document.getElementById('s_time').value;
+            const film = document.getElementById('s_film').value.split('|');
+            const emo = document.getElementById('s_emo').value.split('|');
+            const cam = document.getElementById('s_cam').value.split('|');
+            const col = document.getElementById('s_col').value.split('|');
+            const ref = document.getElementById('s_ref').value;
+            const move = document.getElementById('s_move').value;
+            const dlg = document.getElementById('s_dlg').value;
+
+            const recipeEl = document.getElementById('ui_recipe');
+            if (recipeEl) {
+                recipeEl.innerHTML = `
+                    <span class="box-badge" style="background:rgba(251,191,36,0.2); color:var(--accent-amber);">📌 HIGGSFIELD PANELİNDE TIKLAYACAĞINIZ AYARLAR (MENÜ REÇETESİ)</span>
+                    <div style="font-size:0.85rem; color:var(--text-light); margin-top:8px; line-height:1.6;">
+                        <strong>1. Alt Çubuk:</strong> Model: <code>${model}</code> | Süre: <code>${time}</code><br>
+                        <strong>2. Film Setup Menüsü:</strong> <code>${film[0]}</code><br>
+                        <strong>3. Emotion Wheel (Duygu Çarkı):</strong> <code>${emo[0]}</code><br>
+                        <strong>4. Camera & Colors Menüsü:</strong> <code>${cam[0]}</code> | <code>${col[0]}</code>
+                    </div>
+                `;
+            }
+
+            const simEn = document.getElementById('sim_en');
+            const simTr = document.getElementById('sim_tr');
+            if (simEn) {
+                simEn.innerText =
+                    `01 / SCENE CONTEXT: ${ref}. ${film[0]}.\n` +
+                    `02 / REFERENCES & EMOTION: ${ref} set to ${emo[0]}.\n` +
+                    `03 / SHOTS & TIMELINE: ${move}. Character speaks in clear English: "${dlg}"\n` +
+                    `04 / CAMERA LAW: ${cam[0]}.\n` +
+                    `05 / GRADE AND AUDIO: ${col[0]}, soft studio lighting with screen reflection on face, clear broadcast audio.\n` +
+                    `06 / CONSTRAINTS: Strict character continuity, sharp UI text fidelity, no morphing objects, 8K.`;
+            }
+            if (simTr) {
+                simTr.innerText =
+                    `TÜRKÇE AÇIKLAMASI: [Menü Ayarları] ${film[1]}, ${emo[1]}, ${cam[1]}, ${col[1]}. [Sahne Akışı] ${move} sürecinde karakter İngilizce "${dlg}" cümlesini söyler.`;
+            }
+        }
+
+        // Başlangıç
+        go(0);
+    </script>
+</body>
+</html>
